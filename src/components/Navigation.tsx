@@ -17,7 +17,7 @@ export const Navigation = ({ className }: NavigationProps) => {
   ];
 
   return (
-    <nav className={cn("relative z-50", className)}>
+    <nav className={cn("relative z-50 bg-transparent", className)}>
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between">
           {/* Logo */}
@@ -30,9 +30,9 @@ export const Navigation = ({ className }: NavigationProps) => {
             </span>
           </div>
 
-          {/* Desktop Navigation */}
-          <div className="hidden md:block">
-            <div className="ml-10 flex items-baseline space-x-8">
+          {/* Desktop Navigation - Centered */}
+          <div className="hidden md:block absolute left-1/2 transform -translate-x-1/2">
+            <div className="flex items-baseline space-x-8">
               {navItems.map((item) => (
                 <a
                   key={item.href}
@@ -45,13 +45,10 @@ export const Navigation = ({ className }: NavigationProps) => {
             </div>
           </div>
 
-          {/* Desktop CTA */}
-          <div className="hidden md:flex items-center space-x-4">
-            <Button variant="ghost" size="sm">
-              Login
-            </Button>
+          {/* Desktop CTA - Only Pricing */}
+          <div className="hidden md:flex items-center">
             <Button variant="glow" size="sm">
-              Start Free Trial
+              <a href="#pricing">View Pricing</a>
             </Button>
           </div>
 
@@ -87,12 +84,9 @@ export const Navigation = ({ className }: NavigationProps) => {
                 {item.label}
               </a>
             ))}
-            <div className="pt-4 pb-2 border-t border-border space-y-2">
-              <Button variant="ghost" className="w-full justify-start">
-                Login
-              </Button>
+            <div className="pt-4 pb-2 border-t border-border">
               <Button variant="glow" className="w-full">
-                Start Free Trial
+                <a href="#pricing">View Pricing</a>
               </Button>
             </div>
           </div>

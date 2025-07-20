@@ -68,26 +68,50 @@ export const Hero = () => {
         </div>
       </div>
 
-      {/* Floating Elements */}
-      <div className="absolute top-32 left-[10%] opacity-20">
+      {/* Score Metrics Behind Hero */}
+      <div className="absolute top-32 left-[8%] opacity-30">
         <div className="card-elevated p-4 max-w-sm">
           <div className="flex items-center gap-3">
             <div className="w-3 h-3 bg-success rounded-full animate-pulse-glow" />
-            <span className="text-sm font-medium">Sentiment: Positive</span>
+            <span className="text-sm font-medium">Sentiment Score</span>
           </div>
-          <div className="mt-2 h-2 bg-muted rounded-full">
-            <div className="h-full w-4/5 bg-gradient-to-r from-primary to-success rounded-full" />
+          <div className="mt-2 text-2xl font-bold text-success">87%</div>
+          <div className="mt-1 h-2 bg-muted rounded-full">
+            <div className="h-full w-[87%] bg-gradient-to-r from-primary to-success rounded-full" />
           </div>
         </div>
       </div>
 
-      <div className="absolute bottom-40 right-[15%] opacity-20">
+      <div className="absolute top-48 right-[8%] opacity-30">
         <div className="card-elevated p-4 max-w-sm">
           <div className="flex items-center gap-3">
             <BarChart3 className="h-5 w-5 text-primary" />
             <span className="text-sm font-medium">Performance Score</span>
           </div>
           <div className="mt-2 text-2xl font-bold text-primary">94%</div>
+          <div className="mt-1 h-2 bg-muted rounded-full">
+            <div className="h-full w-[94%] bg-gradient-to-r from-accent to-primary rounded-full" />
+          </div>
+        </div>
+      </div>
+
+      <div className="absolute bottom-32 left-[15%] opacity-25">
+        <div className="card-elevated p-3 max-w-xs">
+          <div className="flex items-center gap-2">
+            <TrendingUp className="h-4 w-4 text-accent" />
+            <span className="text-xs font-medium">Client Satisfaction</span>
+          </div>
+          <div className="mt-1 text-lg font-bold text-accent">96.5%</div>
+        </div>
+      </div>
+
+      <div className="absolute bottom-48 right-[12%] opacity-25">
+        <div className="card-elevated p-3 max-w-xs">
+          <div className="flex items-center gap-2">
+            <Users className="h-4 w-4 text-primary" />
+            <span className="text-xs font-medium">Active Users</span>
+          </div>
+          <div className="mt-1 text-lg font-bold text-primary">2,847</div>
         </div>
       </div>
     </section>

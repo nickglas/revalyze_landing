@@ -8,7 +8,7 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-background">
       {/* Navigation */}
-      <div className="sticky top-0 z-50 bg-background/80 backdrop-blur-lg border-b border-border">
+      <div className="sticky top-0 z-50">
         <Navigation />
       </div>
 
