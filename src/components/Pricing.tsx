@@ -85,7 +85,10 @@ export const Pricing = () => {
   const navigate = useNavigate();
 
   const handleSubscribe = (plan: typeof plans[0]) => {
-    navigate(`/register?plan=${plan.name.toLowerCase().replace(' plan', '')}`);
+    console.log("Plan button clicked:", plan.name);
+    const planValue = plan.name.toLowerCase().replace(" plan", "");
+    console.log("Navigating to:", `/register?plan=${planValue}`);
+    navigate(`/register?plan=${planValue}`);
   };
 
   return (

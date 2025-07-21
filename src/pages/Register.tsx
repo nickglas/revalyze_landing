@@ -53,9 +53,9 @@ export default function Register() {
   };
 
   const plans = [
-    { value: "starter", label: "Starter - $29/month" },
-    { value: "pro", label: "Pro - $99/month" },
-    { value: "business", label: "Business - $199/month" }
+    { value: "starter", label: "Starter - €49/month" },
+    { value: "pro", label: "Pro - €149/month" },
+    { value: "business", label: "Business - €499/month" }
   ];
 
   return (
