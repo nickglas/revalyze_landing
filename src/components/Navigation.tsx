@@ -13,7 +13,7 @@ export const Navigation = ({ className }: NavigationProps) => {
   const navItems = [
     { href: "#features", label: "Features" },
     { href: "#pricing", label: "Pricing" },
-    { href: "#contact", label: "Contact" },
+    { href: "#about", label: "Contact" },
   ];
 
   return (
@@ -22,8 +22,8 @@ export const Navigation = ({ className }: NavigationProps) => {
         <div className="flex h-16 items-center justify-between">
           {/* Logo */}
           <div className="flex items-center space-x-2">
-            <div className="feature-icon">
-              <Zap className="h-5 w-5 text-primary-foreground" />
+            <div className="w-8 h-8 bg-gradient-to-br from-primary to-accent rounded-lg flex items-center justify-center">
+              <span className="text-white font-bold text-lg">R</span>
             </div>
             <span className="text-xl font-bold hero-gradient-text">
               Revalyze
@@ -38,6 +38,11 @@ export const Navigation = ({ className }: NavigationProps) => {
                   key={item.href}
                   href={item.href}
                   className="text-muted-foreground hover:text-foreground transition-colors duration-200 font-medium"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    const targetId = item.href.substring(1);
+                    document.getElementById(targetId)?.scrollIntoView({ behavior: 'smooth' });
+                  }}
                 >
                   {item.label}
                 </a>
@@ -45,10 +50,16 @@ export const Navigation = ({ className }: NavigationProps) => {
             </div>
           </div>
 
-          {/* Desktop CTA - Only Pricing */}
-          <div className="hidden md:flex items-center">
-            <Button variant="glow" size="sm">
-              <a href="#pricing">View Pricing</a>
+          {/* Desktop CTA - Pricing & Login */}
+          <div className="hidden md:flex items-center space-x-4">
+            <Button variant="ghost" size="sm" asChild>
+              <a href="/login">Login</a>
+            </Button>
+            <Button variant="glow" size="sm" asChild>
+              <a href="#pricing" onClick={(e) => {
+                e.preventDefault();
+                document.getElementById('pricing')?.scrollIntoView({ behavior: 'smooth' });
+              }}>View Pricing</a>
             </Button>
           </div>
 
@@ -79,14 +90,26 @@ export const Navigation = ({ className }: NavigationProps) => {
                 key={item.href}
                 href={item.href}
                 className="block px-3 py-2 text-muted-foreground hover:text-foreground transition-colors duration-200 font-medium"
-                onClick={() => setIsOpen(false)}
+                onClick={(e) => {
+                  e.preventDefault();
+                  setIsOpen(false);
+                  const targetId = item.href.substring(1);
+                  document.getElementById(targetId)?.scrollIntoView({ behavior: 'smooth' });
+                }}
               >
                 {item.label}
               </a>
             ))}
-            <div className="pt-4 pb-2 border-t border-border">
-              <Button variant="glow" className="w-full">
-                <a href="#pricing">View Pricing</a>
+            <div className="pt-4 pb-2 border-t border-border space-y-2">
+              <Button variant="ghost" className="w-full" asChild>
+                <a href="/login">Login</a>
+              </Button>
+              <Button variant="glow" className="w-full" asChild>
+                <a href="#pricing" onClick={(e) => {
+                  e.preventDefault();
+                  setIsOpen(false);
+                  document.getElementById('pricing')?.scrollIntoView({ behavior: 'smooth' });
+                }}>View Pricing</a>
               </Button>
             </div>
           </div>

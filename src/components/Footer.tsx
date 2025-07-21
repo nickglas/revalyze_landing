@@ -8,14 +8,14 @@ const footerLinks = {
     { name: "Integrations", href: "#" }
   ],
   company: [
-    { name: "About Us", href: "#" },
+    { name: "About Us", href: "#about" },
     { name: "Careers", href: "#" },
     { name: "Press", href: "#" },
     { name: "Blog", href: "#" }
   ],
   support: [
     { name: "Help Center", href: "#" },
-    { name: "Contact Us", href: "#contact" },
+    { name: "Contact Us", href: "#about" },
     { name: "Status Page", href: "#" },
     { name: "Community", href: "#" }
   ],
@@ -36,8 +36,8 @@ export const Footer = () => {
           {/* Brand Section */}
           <div className="lg:col-span-2">
             <div className="flex items-center space-x-2 mb-4">
-              <div className="feature-icon">
-                <Zap className="h-5 w-5 text-primary-foreground" />
+              <div className="w-8 h-8 bg-gradient-to-br from-primary to-accent rounded-lg flex items-center justify-center">
+                <span className="text-white font-bold text-lg">R</span>
               </div>
               <span className="text-xl font-bold hero-gradient-text">
                 Revalyze

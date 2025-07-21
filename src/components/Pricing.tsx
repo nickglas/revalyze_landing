@@ -57,8 +57,8 @@ const plans = [
     name: "Business Plan",
     stripeProductId: "prod_ShzDZYGXvHiArf",
     currency: "eur",
-    monthlyPrice: 1500,
-    yearlyPrice: 15000,
+    monthlyPrice: 499,
+    yearlyPrice: 4990,
     monthlyPriceId: "price_1RmZF8FNTWq4w3FpqSXBD732",
     yearlyPriceId: "price_1RmZF8FNTWq4w3FpuQpKn4NW",
     allowedUsers: 999999,
@@ -158,7 +158,7 @@ export const Pricing = () => {
                   className={cn(
                     "relative rounded-2xl p-8 transition-all duration-300",
                     plan.popular
-                      ? "card-elevated border-primary/20 scale-105 lg:scale-110"
+                      ? "card-elevated border-primary/20 scale-105 lg:scale-110 pt-12"
                       : "card-elevated"
                   )}
                 >

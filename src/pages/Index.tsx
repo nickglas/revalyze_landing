@@ -2,6 +2,7 @@ import { Navigation } from "@/components/Navigation";
 import { Hero } from "@/components/Hero";
 import { Features } from "@/components/Features";
 import { Pricing } from "@/components/Pricing";
+import { About } from "@/components/About";
 import { Footer } from "@/components/Footer";
 
 const Index = () => {
@@ -20,6 +21,9 @@ const Index = () => {
 
       {/* Pricing Section */}
       <Pricing />
+
+      {/* About Us Section */}
+      <About />
 
       {/* Footer */}
       <Footer />
