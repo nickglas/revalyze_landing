@@ -85,8 +85,7 @@ export const Pricing = () => {
   const navigate = useNavigate();
 
   const handleSubscribe = (plan: typeof plans[0]) => {
-    // Navigate to login page with the selected plan info
-    navigate('/login');
+    navigate(`/register?plan=${plan.name.toLowerCase().replace(' plan', '')}`);
   };
 
   return (

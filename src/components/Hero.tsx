@@ -1,8 +1,14 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Play, TrendingUp, Users, BarChart3 } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { useNavigate } from "react-router-dom";
 
 export const Hero = () => {
+  const navigate = useNavigate();
+
+  const handleStartTrial = () => {
+    navigate("/register");
+  };
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* Background Effects */}
@@ -40,7 +46,7 @@ export const Hero = () => {
 
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-16">
-            <Button variant="hero" size="xl" className="min-w-[200px]">
+            <Button variant="hero" size="xl" className="min-w-[200px]" onClick={handleStartTrial}>
               Start Free Trial
               <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
             </Button>
