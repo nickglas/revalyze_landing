@@ -27,14 +27,18 @@ const Login = () => {
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Login data:", loginData);
+    console.log("Login form submitted:", loginData);
     // TODO: Implement login logic
   };
 
   const handleRegister = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Register data:", registerData);
+    console.log("Register form submitted:", registerData);
     // TODO: Implement registration logic
+  };
+
+  const handleTabChange = (value: string) => {
+    console.log("Tab changed to:", value);
   };
 
   return (
@@ -65,7 +69,7 @@ const Login = () => {
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <Tabs defaultValue="login" className="w-full">
+            <Tabs defaultValue="login" className="w-full" onValueChange={handleTabChange}>
               <TabsList className="grid w-full grid-cols-2">
                 <TabsTrigger value="login">Sign In</TabsTrigger>
                 <TabsTrigger value="register">Create Account</TabsTrigger>
