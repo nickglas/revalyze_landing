@@ -193,7 +193,7 @@ export const Pricing = () => {
                     size="lg"
                     onClick={() => handleSubscribe(plan)}
                   >
-                    {t('pricing.subscribe')}
+                    Subscribe to {plan.name}
                   </Button>
                 </div>
               );
