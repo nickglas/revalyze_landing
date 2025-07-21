@@ -1,5 +1,6 @@
 import { Brain, BarChart3, Users, MessageSquare, TrendingUp, Shield } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { useNavigate } from "react-router-dom";
 
 const features = [
   {
@@ -41,6 +42,16 @@ const features = [
 ];
 
 export const Features = () => {
+  const navigate = useNavigate();
+
+  const handleStartTrial = () => {
+    navigate("/register");
+  };
+
+  const handleScheduleDemo = () => {
+    // TODO: Implement demo scheduling
+    console.log("Schedule demo clicked");
+  };
   return (
     <section id="features" className="py-24 relative overflow-hidden">
       {/* Background Effects */}
@@ -113,10 +124,16 @@ export const Features = () => {
               Join hundreds of teams already using our platform to transform their customer interactions.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <button className="btn-glow px-8 py-3 rounded-lg font-semibold text-primary-foreground">
+              <button 
+                className="btn-glow px-8 py-3 rounded-lg font-semibold text-primary-foreground"
+                onClick={handleStartTrial}
+              >
                 Start Free Trial
               </button>
-              <button className="px-8 py-3 rounded-lg font-medium border border-primary/20 hover:border-primary/40 transition-colors">
+              <button 
+                className="px-8 py-3 rounded-lg font-medium border border-primary/20 hover:border-primary/40 transition-colors"
+                onClick={handleScheduleDemo}
+              >
                 Schedule Demo
               </button>
             </div>
