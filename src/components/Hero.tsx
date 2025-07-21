@@ -30,11 +30,11 @@ export const Hero = () => {
           {/* Main Headline */}
           <h1 className="text-4xl font-bold tracking-tight sm:text-6xl lg:text-7xl mb-6">
             Transform Customer{" "}
-            <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent animate-pulse">
               Interactions
             </span>{" "}
             Into Actionable{" "}
-            <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent animate-pulse">
               Insights
             </span>
           </h1>
