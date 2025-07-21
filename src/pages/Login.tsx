@@ -4,6 +4,8 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Checkbox } from "@/components/ui/checkbox";
 import { Zap } from "lucide-react";
 import { Link } from "react-router-dom";
 
@@ -14,14 +16,13 @@ const Login = () => {
   });
 
   const [registerData, setRegisterData] = useState({
+    fullName: "",
     companyName: "",
-    companyMainEmail: "",
-    companyPhone: "",
-    address: "",
-    adminName: "",
-    adminEmail: "",
+    email: "",
     password: "",
-    passwordConfirm: ""
+    passwordConfirm: "",
+    selectedPlan: "starter",
+    acceptTerms: false
   });
 
   const handleLogin = (e: React.FormEvent) => {
@@ -102,7 +103,18 @@ const Login = () => {
               
               <TabsContent value="register" className="space-y-4 mt-6">
                 <form onSubmit={handleRegister} className="space-y-4">
-                  <div className="grid grid-cols-1 gap-4">
+                  <div className="space-y-4">
+                    <div className="space-y-2">
+                      <Label htmlFor="fullName">Full Name</Label>
+                      <Input
+                        id="fullName"
+                        placeholder="John Doe"
+                        value={registerData.fullName}
+                        onChange={(e) => setRegisterData({...registerData, fullName: e.target.value})}
+                        required
+                      />
+                    </div>
+                    
                     <div className="space-y-2">
                       <Label htmlFor="companyName">Company Name</Label>
                       <Input
@@ -113,63 +125,23 @@ const Login = () => {
                         required
                       />
                     </div>
+                    
                     <div className="space-y-2">
-                      <Label htmlFor="companyMainEmail">Company Email</Label>
+                      <Label htmlFor="registerEmail">Email</Label>
                       <Input
-                        id="companyMainEmail"
+                        id="registerEmail"
                         type="email"
-                        placeholder="contact@company.com"
-                        value={registerData.companyMainEmail}
-                        onChange={(e) => setRegisterData({...registerData, companyMainEmail: e.target.value})}
+                        placeholder="your@email.com"
+                        value={registerData.email}
+                        onChange={(e) => setRegisterData({...registerData, email: e.target.value})}
                         required
                       />
                     </div>
+                    
                     <div className="space-y-2">
-                      <Label htmlFor="companyPhone">Company Phone</Label>
+                      <Label htmlFor="registerPassword">Password</Label>
                       <Input
-                        id="companyPhone"
-                        type="tel"
-                        placeholder="+31 6 12345678"
-                        value={registerData.companyPhone}
-                        onChange={(e) => setRegisterData({...registerData, companyPhone: e.target.value})}
-                        required
-                      />
-                    </div>
-                    <div className="space-y-2">
-                      <Label htmlFor="address">Address</Label>
-                      <Input
-                        id="address"
-                        placeholder="Street, City, Country"
-                        value={registerData.address}
-                        onChange={(e) => setRegisterData({...registerData, address: e.target.value})}
-                        required
-                      />
-                    </div>
-                    <div className="space-y-2">
-                      <Label htmlFor="adminName">Admin Name</Label>
-                      <Input
-                        id="adminName"
-                        placeholder="John Admin"
-                        value={registerData.adminName}
-                        onChange={(e) => setRegisterData({...registerData, adminName: e.target.value})}
-                        required
-                      />
-                    </div>
-                    <div className="space-y-2">
-                      <Label htmlFor="adminEmail">Admin Email</Label>
-                      <Input
-                        id="adminEmail"
-                        type="email"
-                        placeholder="admin@company.com"
-                        value={registerData.adminEmail}
-                        onChange={(e) => setRegisterData({...registerData, adminEmail: e.target.value})}
-                        required
-                      />
-                    </div>
-                    <div className="space-y-2">
-                      <Label htmlFor="newPassword">Password</Label>
-                      <Input
-                        id="newPassword"
+                        id="registerPassword"
                         type="password"
                         placeholder="Create a strong password"
                         value={registerData.password}
@@ -177,6 +149,7 @@ const Login = () => {
                         required
                       />
                     </div>
+                    
                     <div className="space-y-2">
                       <Label htmlFor="confirmPassword">Confirm Password</Label>
                       <Input
@@ -188,8 +161,52 @@ const Login = () => {
                         required
                       />
                     </div>
+                    
+                    <div className="space-y-2">
+                      <Label htmlFor="planSelect">Plan Selection</Label>
+                      <Select 
+                        value={registerData.selectedPlan} 
+                        onValueChange={(value) => setRegisterData({...registerData, selectedPlan: value})}
+                      >
+                        <SelectTrigger>
+                          <SelectValue placeholder="Choose a plan" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="starter">Starter Plan - €49/month</SelectItem>
+                          <SelectItem value="pro">Pro Plan - €149/month</SelectItem>
+                          <SelectItem value="business">Business Plan - €499/month</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+                    
+                    <div className="flex items-center space-x-2">
+                      <Checkbox 
+                        id="terms" 
+                        checked={registerData.acceptTerms}
+                        onCheckedChange={(checked) => 
+                          setRegisterData({...registerData, acceptTerms: checked as boolean})
+                        }
+                        required
+                      />
+                      <Label htmlFor="terms" className="text-sm">
+                        I accept the{" "}
+                        <Link to="/terms" className="text-primary hover:underline">
+                          Terms of Service
+                        </Link>{" "}
+                        and{" "}
+                        <Link to="/privacy" className="text-primary hover:underline">
+                          Privacy Policy
+                        </Link>
+                      </Label>
+                    </div>
                   </div>
-                  <Button type="submit" variant="hero" className="w-full">
+                  
+                  <Button 
+                    type="submit" 
+                    variant="hero" 
+                    className="w-full"
+                    disabled={!registerData.acceptTerms}
+                  >
                     Create Account
                   </Button>
                 </form>

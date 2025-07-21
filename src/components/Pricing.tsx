@@ -2,8 +2,8 @@ import { useState } from "react";
 import { Check, Star, Zap } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Switch } from "@/components/ui/switch";
-import { SubscriptionModal } from "@/components/SubscriptionModal";
 import { cn } from "@/lib/utils";
+import { useNavigate } from "react-router-dom";
 
 // Pricing data based on the provided subscription information
 const plans = [
@@ -82,23 +82,11 @@ const plans = [
 
 export const Pricing = () => {
   const [isYearly, setIsYearly] = useState(false);
-  const [selectedPlan, setSelectedPlan] = useState<{
-    name: string;
-    price: string;
-    priceId: string;
-  } | null>(null);
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const navigate = useNavigate();
 
   const handleSubscribe = (plan: typeof plans[0]) => {
-    const price = isYearly ? plan.yearlyPrice : plan.monthlyPrice;
-    const priceId = isYearly ? plan.yearlyPriceId : plan.monthlyPriceId;
-    
-    setSelectedPlan({
-      name: plan.name,
-      price: `€${price} / ${isYearly ? 'year' : 'month'}`,
-      priceId
-    });
-    setIsModalOpen(true);
+    // Navigate to login page with the selected plan info
+    navigate('/login');
   };
 
   return (
@@ -235,13 +223,6 @@ export const Pricing = () => {
           </div>
         </div>
       </section>
-
-      {/* Subscription Modal */}
-      <SubscriptionModal
-        isOpen={isModalOpen}
-        onClose={() => setIsModalOpen(false)}
-        selectedPlan={selectedPlan}
-      />
     </>
   );
 };
