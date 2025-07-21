@@ -163,9 +163,9 @@ export const Pricing = () => {
                   <div className="text-center mb-8">
                     <h3 className="text-2xl font-bold mb-2">{t(`pricing.${plan.name.toLowerCase().replace(' plan', '')}.title`)}</h3>
                     <div className="mb-4">
-                      <span className="text-4xl font-bold">{t(`pricing.${plan.name.toLowerCase().replace(' plan', '')}.price`)}</span>
+                      <span className="text-4xl font-bold">€{price}</span>
                       <span className="text-muted-foreground ml-1">
-                        {t(`pricing.${plan.name.toLowerCase().replace(' plan', '')}.period`)}
+                        /{isYearly ? 'year' : 'month'}
                       </span>
                       {isYearly && savings > 0 && (
                         <div className="text-sm text-success mt-1">
