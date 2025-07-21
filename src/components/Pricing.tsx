@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Switch } from "@/components/ui/switch";
 import { cn } from "@/lib/utils";
 import { useNavigate } from "react-router-dom";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 // Pricing data based on the provided subscription information
 const plans = [
@@ -83,6 +84,7 @@ const plans = [
 export const Pricing = () => {
   const [isYearly, setIsYearly] = useState(false);
   const navigate = useNavigate();
+  const { t } = useLanguage();
 
   const handleSubscribe = (plan: typeof plans[0]) => {
     console.log("Plan button clicked:", plan.name);
@@ -106,16 +108,11 @@ export const Pricing = () => {
             </div>
             
             <h2 className="text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl mb-6">
-              Choose the perfect{" "}
-              <span className="hero-gradient-text">
-                plan
-              </span>{" "}
-              for your team
+              {t('pricing.title')}
             </h2>
             
             <p className="mx-auto max-w-2xl text-lg text-muted-foreground mb-8">
-              Start with our free trial and scale as you grow. All plans include our core features 
-              with no hidden fees or setup costs.
+              {t('pricing.subtitle')}
             </p>
 
             {/* Billing Toggle */}
@@ -164,11 +161,11 @@ export const Pricing = () => {
 
                   {/* Plan Header */}
                   <div className="text-center mb-8">
-                    <h3 className="text-2xl font-bold mb-2">{plan.name}</h3>
+                    <h3 className="text-2xl font-bold mb-2">{t(`pricing.${plan.name.toLowerCase().replace(' plan', '')}.title`)}</h3>
                     <div className="mb-4">
-                      <span className="text-4xl font-bold">€{price}</span>
+                      <span className="text-4xl font-bold">{t(`pricing.${plan.name.toLowerCase().replace(' plan', '')}.price`)}</span>
                       <span className="text-muted-foreground ml-1">
-                        /{isYearly ? 'year' : 'month'}
+                        {t(`pricing.${plan.name.toLowerCase().replace(' plan', '')}.period`)}
                       </span>
                       {isYearly && savings > 0 && (
                         <div className="text-sm text-success mt-1">
@@ -176,7 +173,7 @@ export const Pricing = () => {
                         </div>
                       )}
                     </div>
-                    <p className="text-muted-foreground">{plan.description}</p>
+                    <p className="text-muted-foreground">{t(`pricing.${plan.name.toLowerCase().replace(' plan', '')}.desc`)}</p>
                   </div>
 
                   {/* Features */}
@@ -196,7 +193,7 @@ export const Pricing = () => {
                     size="lg"
                     onClick={() => handleSubscribe(plan)}
                   >
-                    Subscribe to {plan.name}
+                    {t('pricing.subscribe')}
                   </Button>
                 </div>
               );

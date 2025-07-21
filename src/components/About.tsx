@@ -1,6 +1,9 @@
 import { Users, Target, Eye } from "lucide-react";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 export const About = () => {
+  const { t } = useLanguage();
+  
   return (
     <section id="about" className="py-24 relative overflow-hidden">
       {/* Background Effects */}
@@ -10,7 +13,7 @@ export const About = () => {
         {/* Header */}
         <div className="text-center mb-16 animate-fade-in">
           <h2 className="text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl mb-6">
-            Who <span className="hero-gradient-text animate-gradient-shift">we are</span>
+            {t('about.title')}
           </h2>
         </div>
 
@@ -54,7 +57,7 @@ export const About = () => {
               <h3 className="text-2xl font-bold transition-colors duration-300 group-hover:text-primary">2025 Mission & Vision</h3>
             </div>
             <p className="text-muted-foreground leading-relaxed transition-colors duration-300 group-hover:text-foreground/80">
-              To empower companies with AI-driven tools that measure, analyze, and improve communication between employees and customers. Revalyze makes it easy for teams to track performance, understand sentiment, and continuously raise the quality of their service, all with minimal effort and maximum clarity.
+              {t('about.content')}
             </p>
           </div>
 

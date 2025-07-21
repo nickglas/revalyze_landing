@@ -7,9 +7,11 @@ import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Eye, EyeOff, ArrowLeft } from "lucide-react";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 export default function Register() {
   const [searchParams] = useSearchParams();
+  const { t } = useLanguage();
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [formData, setFormData] = useState({
@@ -53,9 +55,9 @@ export default function Register() {
   };
 
   const plans = [
-    { value: "starter", label: "Starter - €49/month" },
-    { value: "pro", label: "Pro - €149/month" },
-    { value: "business", label: "Business - €499/month" }
+    { value: "starter", label: t('pricing.starter.title') + " - " + t('pricing.starter.price') + t('pricing.starter.period') },
+    { value: "pro", label: t('pricing.pro.title') + " - " + t('pricing.pro.price') + t('pricing.pro.period') },
+    { value: "business", label: t('pricing.business.title') + " - " + t('pricing.business.price') + t('pricing.business.period') }
   ];
 
   return (
@@ -79,16 +81,16 @@ export default function Register() {
 
           <Card className="card-elevated">
             <CardHeader className="text-center">
-              <CardTitle className="text-2xl">Create Account</CardTitle>
+              <CardTitle className="text-2xl">{t('register.title')}</CardTitle>
               <CardDescription>
-                Join thousands of teams transforming their customer interactions
+                {t('register.subtitle')}
               </CardDescription>
             </CardHeader>
             <CardContent>
               <form onSubmit={handleSubmit} className="space-y-4">
                 {/* Full Name */}
-                <div className="space-y-2">
-                  <Label htmlFor="fullName">Full Name</Label>
+              <div className="space-y-2">
+                <Label htmlFor="fullName">{t('register.fullName')}</Label>
                   <Input
                     id="fullName"
                     type="text"
@@ -100,8 +102,8 @@ export default function Register() {
                 </div>
 
                 {/* Company Name */}
-                <div className="space-y-2">
-                  <Label htmlFor="companyName">Company Name</Label>
+              <div className="space-y-2">
+                <Label htmlFor="companyName">{t('register.companyName')}</Label>
                   <Input
                     id="companyName"
                     type="text"
@@ -113,8 +115,8 @@ export default function Register() {
                 </div>
 
                 {/* Email */}
-                <div className="space-y-2">
-                  <Label htmlFor="email">Email Address</Label>
+              <div className="space-y-2">
+                <Label htmlFor="email">{t('register.email')}</Label>
                   <Input
                     id="email"
                     type="email"
@@ -126,8 +128,8 @@ export default function Register() {
                 </div>
 
                 {/* Password */}
-                <div className="space-y-2">
-                  <Label htmlFor="password">Password</Label>
+              <div className="space-y-2">
+                <Label htmlFor="password">{t('register.password')}</Label>
                   <div className="relative">
                     <Input
                       id="password"
@@ -154,8 +156,8 @@ export default function Register() {
                 </div>
 
                 {/* Confirm Password */}
-                <div className="space-y-2">
-                  <Label htmlFor="confirmPassword">Confirm Password</Label>
+              <div className="space-y-2">
+                <Label htmlFor="confirmPassword">{t('register.confirmPassword')}</Label>
                   <div className="relative">
                     <Input
                       id="confirmPassword"
@@ -181,12 +183,12 @@ export default function Register() {
                   </div>
                 </div>
 
-                {/* Plan Selection */}
+                 {/* Plan Selection */}
                 <div className="space-y-2">
-                  <Label htmlFor="plan">Select Plan</Label>
+                  <Label htmlFor="plan">{t('register.selectPlan')}</Label>
                   <Select value={formData.selectedPlan} onValueChange={(value) => handleInputChange("selectedPlan", value)}>
                     <SelectTrigger>
-                      <SelectValue placeholder="Choose your plan" />
+                      <SelectValue placeholder={t('register.selectPlan')} />
                     </SelectTrigger>
                     <SelectContent>
                       {plans.map((plan) => (
@@ -209,29 +211,22 @@ export default function Register() {
                     htmlFor="terms"
                     className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
                   >
-                    I accept the{" "}
-                    <Link to="/terms" className="text-primary hover:underline">
-                      Terms & Conditions
-                    </Link>{" "}
-                    and{" "}
-                    <Link to="/privacy" className="text-primary hover:underline">
-                      Privacy Policy
-                    </Link>
+                    {t('register.terms')}
                   </label>
                 </div>
 
                 {/* Submit Button */}
-                <Button type="submit" className="w-full" size="lg">
-                  Create Account
-                </Button>
+              <Button type="submit" className="w-full" size="lg">
+                {t('register.createAccount')}
+              </Button>
               </form>
 
               {/* Sign In Link */}
               <div className="mt-6 text-center">
                 <p className="text-sm text-muted-foreground">
-                  Already have an account?{" "}
+                  {t('register.haveAccount')}{" "}
                   <Link to="/login" className="text-primary hover:underline font-medium">
-                    Sign in here
+                    {t('register.loginHere')}
                   </Link>
                 </p>
               </div>

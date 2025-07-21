@@ -2,9 +2,11 @@ import { Button } from "@/components/ui/button";
 import { ArrowRight, Play, TrendingUp, Users, BarChart3 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useNavigate } from "react-router-dom";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 export const Hero = () => {
   const navigate = useNavigate();
+  const { t } = useLanguage();
 
   const handleStartTrial = () => {
     navigate("/register");
@@ -27,32 +29,23 @@ export const Hero = () => {
 
           {/* Main Headline */}
           <h1 className="text-4xl font-bold tracking-tight sm:text-6xl lg:text-7xl mb-6">
-            Transform Customer{" "}
-            <span className="hero-gradient-text glow-effect">
-              Interactions
-            </span>{" "}
-            Into Actionable{" "}
-            <span className="hero-gradient-text">
-              Insights
-            </span>
+            {t('hero.title')}
           </h1>
 
           {/* Subheadline */}
           <p className="mx-auto max-w-2xl text-lg text-muted-foreground sm:text-xl lg:text-2xl mb-10 leading-relaxed">
-            Revalyze uses advanced AI to analyze employee-client conversations, 
-            providing sentiment analysis, performance reviews, and strategic insights 
-            that drive business growth.
+            {t('hero.subtitle')}
           </p>
 
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-16">
             <Button variant="hero" size="xl" className="min-w-[200px]" onClick={handleStartTrial}>
-              Start Free Trial
+              {t('hero.cta')}
               <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
             </Button>
             <Button variant="premium" size="xl" className="min-w-[200px]">
               <Play className="mr-2 h-5 w-5" />
-              Watch Demo
+              {t('hero.learnMore')}
             </Button>
           </div>
 

@@ -1,6 +1,7 @@
 import { Brain, BarChart3, Users, MessageSquare, TrendingUp, Shield } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useNavigate } from "react-router-dom";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const features = [
   {
@@ -43,6 +44,7 @@ const features = [
 
 export const Features = () => {
   const navigate = useNavigate();
+  const { t } = useLanguage();
 
   const handleStartTrial = () => {
     navigate("/register");
@@ -66,16 +68,11 @@ export const Features = () => {
           </div>
           
           <h2 className="text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl mb-6">
-            Everything you need to{" "}
-            <span className="hero-gradient-text">
-              revolutionize
-            </span>{" "}
-            your customer interactions
+            {t('features.title')}
           </h2>
           
           <p className="mx-auto max-w-2xl text-lg text-muted-foreground">
-            Our AI-driven platform transforms raw conversation data into strategic insights 
-            that drive performance improvements and business growth.
+            {t('features.subtitle')}
           </p>
         </div>
 
@@ -128,7 +125,7 @@ export const Features = () => {
                 className="btn-glow px-8 py-3 rounded-lg font-semibold text-primary-foreground"
                 onClick={handleStartTrial}
               >
-                Start Free Trial
+                {t('features.cta')}
               </button>
               <button 
                 className="px-8 py-3 rounded-lg font-medium border border-primary/20 hover:border-primary/40 transition-colors"

@@ -1,7 +1,15 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Menu, X, Zap } from "lucide-react";
+import { Menu, X, Zap, ChevronDown } from "lucide-react";
+import { IoEarth } from "react-icons/io5";
 import { cn } from "@/lib/utils";
+import { useLanguage } from "@/contexts/LanguageContext";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 interface NavigationProps {
   className?: string;
@@ -9,11 +17,12 @@ interface NavigationProps {
 
 export const Navigation = ({ className }: NavigationProps) => {
   const [isOpen, setIsOpen] = useState(false);
+  const { language, setLanguage, t } = useLanguage();
 
   const navItems = [
-    { href: "#features", label: "Features" },
-    { href: "#pricing", label: "Pricing" },
-    { href: "#about", label: "Contact" },
+    { href: "#features", label: t('nav.features') },
+    { href: "#pricing", label: t('nav.pricing') },
+    { href: "#about", label: t('nav.contact') },
   ];
 
   return (
@@ -50,16 +59,38 @@ export const Navigation = ({ className }: NavigationProps) => {
             </div>
           </div>
 
-          {/* Desktop CTA - Pricing & Login */}
+          {/* Desktop CTA - Language, Pricing & Login */}
           <div className="hidden md:flex items-center space-x-4">
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variant="ghost" size="sm" className="gap-2">
+                  <IoEarth className="h-4 w-4" />
+                  <ChevronDown className="h-3 w-3" />
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end">
+                <DropdownMenuItem 
+                  onClick={() => setLanguage('en')}
+                  className={language === 'en' ? 'bg-muted' : ''}
+                >
+                  {t('language.english')}
+                </DropdownMenuItem>
+                <DropdownMenuItem 
+                  onClick={() => setLanguage('nl')}
+                  className={language === 'nl' ? 'bg-muted' : ''}
+                >
+                  {t('language.dutch')}
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
             <Button variant="ghost" size="sm" asChild>
-              <a href="/login">Login</a>
+              <a href="/login">{t('nav.login')}</a>
             </Button>
             <Button variant="glow" size="sm" asChild>
               <a href="#pricing" onClick={(e) => {
                 e.preventDefault();
                 document.getElementById('pricing')?.scrollIntoView({ behavior: 'smooth' });
-              }}>View Pricing</a>
+              }}>{t('nav.viewPricing')}</a>
             </Button>
           </div>
 
@@ -101,15 +132,40 @@ export const Navigation = ({ className }: NavigationProps) => {
               </a>
             ))}
             <div className="pt-4 pb-2 border-t border-border space-y-2">
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button variant="ghost" className="w-full justify-between">
+                    <div className="flex items-center gap-2">
+                      <IoEarth className="h-4 w-4" />
+                      <span>{language === 'en' ? t('language.english') : t('language.dutch')}</span>
+                    </div>
+                    <ChevronDown className="h-3 w-3" />
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent className="w-56">
+                  <DropdownMenuItem 
+                    onClick={() => setLanguage('en')}
+                    className={language === 'en' ? 'bg-muted' : ''}
+                  >
+                    {t('language.english')}
+                  </DropdownMenuItem>
+                  <DropdownMenuItem 
+                    onClick={() => setLanguage('nl')}
+                    className={language === 'nl' ? 'bg-muted' : ''}
+                  >
+                    {t('language.dutch')}
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
               <Button variant="ghost" className="w-full" asChild>
-                <a href="/login">Login</a>
+                <a href="/login">{t('nav.login')}</a>
               </Button>
               <Button variant="glow" className="w-full" asChild>
                 <a href="#pricing" onClick={(e) => {
                   e.preventDefault();
                   setIsOpen(false);
                   document.getElementById('pricing')?.scrollIntoView({ behavior: 'smooth' });
-                }}>View Pricing</a>
+                }}>{t('nav.viewPricing')}</a>
               </Button>
             </div>
           </div>

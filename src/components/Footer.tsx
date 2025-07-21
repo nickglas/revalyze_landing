@@ -1,4 +1,5 @@
 import { Zap, Mail, Phone, MapPin } from "lucide-react";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const footerLinks = {
   product: [
@@ -28,6 +29,35 @@ const footerLinks = {
 };
 
 export const Footer = () => {
+  const { t } = useLanguage();
+  
+  const footerLinksTranslated = {
+    product: [
+      { name: t('footer.features'), href: "#features" },
+      { name: t('footer.pricing'), href: "#pricing" },
+      { name: t('footer.api'), href: "#" },
+      { name: "Integrations", href: "#" }
+    ],
+    company: [
+      { name: t('footer.about'), href: "#about" },
+      { name: t('footer.careers'), href: "#" },
+      { name: t('footer.press'), href: "#" },
+      { name: "Blog", href: "#" }
+    ],
+    support: [
+      { name: t('footer.help'), href: "#" },
+      { name: t('footer.contact'), href: "#about" },
+      { name: "Status Page", href: "#" },
+      { name: "Community", href: "#" }
+    ],
+    legal: [
+      { name: "Privacy Policy", href: "#" },
+      { name: "Terms of Service", href: "#" },
+      { name: "Cookie Policy", href: "#" },
+      { name: "GDPR", href: "#" }
+    ]
+  };
+  
   return (
     <footer className="relative bg-surface-elevated border-t border-border">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16">
@@ -67,9 +97,9 @@ export const Footer = () => {
 
           {/* Links Sections */}
           <div>
-            <h3 className="font-semibold mb-4">Product</h3>
+            <h3 className="font-semibold mb-4">{t('footer.product')}</h3>
             <ul className="space-y-3">
-              {footerLinks.product.map((link) => (
+              {footerLinksTranslated.product.map((link) => (
                 <li key={link.name}>
                   <a
                     href={link.href}
@@ -83,9 +113,9 @@ export const Footer = () => {
           </div>
 
           <div>
-            <h3 className="font-semibold mb-4">Company</h3>
+            <h3 className="font-semibold mb-4">{t('footer.company')}</h3>
             <ul className="space-y-3">
-              {footerLinks.company.map((link) => (
+              {footerLinksTranslated.company.map((link) => (
                 <li key={link.name}>
                   <a
                     href={link.href}
@@ -99,9 +129,9 @@ export const Footer = () => {
           </div>
 
           <div>
-            <h3 className="font-semibold mb-4">Support</h3>
+            <h3 className="font-semibold mb-4">{t('footer.support')}</h3>
             <ul className="space-y-3">
-              {footerLinks.support.map((link) => (
+              {footerLinksTranslated.support.map((link) => (
                 <li key={link.name}>
                   <a
                     href={link.href}
@@ -117,7 +147,7 @@ export const Footer = () => {
           <div>
             <h3 className="font-semibold mb-4">Legal</h3>
             <ul className="space-y-3">
-              {footerLinks.legal.map((link) => (
+              {footerLinksTranslated.legal.map((link) => (
                 <li key={link.name}>
                   <a
                     href={link.href}
@@ -134,7 +164,7 @@ export const Footer = () => {
         {/* Bottom Section */}
         <div className="mt-12 pt-8 border-t border-border flex flex-col md:flex-row justify-between items-center">
           <div className="text-muted-foreground text-sm">
-            © 2024 Revalyze. All rights reserved.
+            © 2024 Revalyze. {t('footer.rights')}
           </div>
           
           <div className="mt-4 md:mt-0">
