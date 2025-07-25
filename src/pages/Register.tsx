@@ -324,16 +324,20 @@ export default function Register() {
               </form>
 
               {/* Sign In Link */}
-              <div className="mt-6 text-center">
-                <p className="text-sm text-muted-foreground">
-                  {t("register.haveAccount")}{" "}
-                  <Link
-                    to="/login"
-                    className="text-primary hover:underline font-medium"
-                  >
-                    {t("register.loginHere")}
-                  </Link>
-                </p>
+              <div className="mt-6 text-center flex items-center justify-center gap-4">
+                <Link
+                  to="/"
+                  className="text-primary hover:underline font-medium"
+                >
+                  Home
+                </Link>
+                |
+                <Link
+                  to="/login"
+                  className="text-primary hover:underline font-medium"
+                >
+                  Login
+                </Link>
               </div>
             </CardContent>
           </Card>
