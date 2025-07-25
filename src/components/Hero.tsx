@@ -25,13 +25,13 @@ export const Hero = () => {
       <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center">
         <div className="mx-auto max-w-4xl">
           {/* Badge */}
-          <div className="inline-flex items-center rounded-full border border-primary/20 bg-surface-elevated/50 px-4 py-1.5 text-sm font-medium text-muted-foreground backdrop-blur-sm mb-8">
+          <div className="hidden md:inline-flex items-center rounded-full border border-primary/20 bg-surface-elevated/50 px-4 py-1.5 text-sm font-medium text-muted-foreground backdrop-blur-sm mb-8">
             <TrendingUp className="mr-2 h-4 w-4 text-primary" />
             AI-Powered Interaction Analysis
           </div>
 
           {/* Main Headline */}
-          <h1 className="text-4xl font-bold tracking-tight sm:text-6xl lg:text-7xl mb-6">
+          <h1 className="text-3xl font-bold tracking-tight sm:text-5xl lg:text-7xl mb-6">
             Transform Customer{" "}
             <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent animate-pulse">
               Interactions
@@ -43,7 +43,7 @@ export const Hero = () => {
           </h1>
 
           {/* Subheadline */}
-          <p className="mx-auto max-w-2xl text-lg text-muted-foreground sm:text-xl lg:text-2xl mb-10 leading-relaxed">
+          <p className="mx-auto max-w-2xl text-md text-muted-foreground lg:text-2xl mb-10 leading-relaxed">
             {t("hero.subtitle")}
           </p>
 
@@ -82,7 +82,7 @@ export const Hero = () => {
         </div>
       </div>
       {/* Score Metrics Behind Hero */}
-      <div className="absolute top-32 left-[8%] opacity-30">
+      <div className="absolute top-32 left-[8%] opacity-30 hidden">
         <div className="card-elevated p-4 max-w-sm">
           <div className="flex items-center gap-3">
             <div className="w-3 h-3 bg-success rounded-full animate-pulse-glow" />
@@ -94,7 +94,7 @@ export const Hero = () => {
           </div>
         </div>
       </div>
-      <div className="absolute top-48 right-[8%] opacity-30">
+      <div className="absolute top-48 right-[8%] opacity-30 hidden">
         <div className="card-elevated p-4 max-w-sm">
           <div className="flex items-center gap-3">
             <BarChart3 className="h-5 w-5 text-primary" />
@@ -106,7 +106,7 @@ export const Hero = () => {
           </div>
         </div>
       </div>
-      <div className="absolute bottom-32 left-[15%] opacity-25">
+      <div className="absolute bottom-32 left-[15%] opacity-25 hidden">
         <div className="card-elevated p-3 max-w-xs">
           <div className="flex items-center gap-2">
             <TrendingUp className="h-4 w-4 text-accent" />
@@ -115,7 +115,7 @@ export const Hero = () => {
           <div className="mt-1 text-lg font-bold text-accent">96.5%</div>
         </div>
       </div>
-      <div className="absolute bottom-48 right-[12%] opacity-25">
+      <div className="absolute bottom-48 right-[12%] opacity-25 hidden">
         <div className="card-elevated p-3 max-w-xs">
           <div className="flex items-center gap-2">
             <Users className="h-4 w-4 text-primary" />
