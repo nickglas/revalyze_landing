@@ -12,12 +12,15 @@ export const Hero = () => {
     navigate("/register");
   };
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-16">
+      {" "}
       {/* Background Effects */}
       <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-accent/5" />
       <div className="absolute top-20 left-10 w-72 h-72 bg-primary/10 rounded-full blur-3xl animate-float" />
-      <div className="absolute bottom-20 right-10 w-96 h-96 bg-accent/10 rounded-full blur-3xl animate-float" style={{ animationDelay: '1s' }} />
-      
+      <div
+        className="absolute bottom-20 right-10 w-96 h-96 bg-accent/10 rounded-full blur-3xl animate-float"
+        style={{ animationDelay: "1s" }}
+      />
       {/* Content */}
       <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center">
         <div className="mx-auto max-w-4xl">
@@ -41,18 +44,23 @@ export const Hero = () => {
 
           {/* Subheadline */}
           <p className="mx-auto max-w-2xl text-lg text-muted-foreground sm:text-xl lg:text-2xl mb-10 leading-relaxed">
-            {t('hero.subtitle')}
+            {t("hero.subtitle")}
           </p>
 
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-16">
-            <Button variant="hero" size="xl" className="min-w-[200px]" onClick={handleStartTrial}>
-              {t('hero.cta')}
+            <Button
+              variant="hero"
+              size="xl"
+              className="min-w-[200px]"
+              onClick={handleStartTrial}
+            >
+              {t("hero.cta")}
               <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
             </Button>
             <Button variant="premium" size="xl" className="min-w-[200px]">
               <Play className="mr-2 h-5 w-5" />
-              {t('hero.learnMore')}
+              {t("hero.learnMore")}
             </Button>
           </div>
 
@@ -73,7 +81,6 @@ export const Hero = () => {
           </div>
         </div>
       </div>
-
       {/* Score Metrics Behind Hero */}
       <div className="absolute top-32 left-[8%] opacity-30">
         <div className="card-elevated p-4 max-w-sm">
@@ -87,7 +94,6 @@ export const Hero = () => {
           </div>
         </div>
       </div>
-
       <div className="absolute top-48 right-[8%] opacity-30">
         <div className="card-elevated p-4 max-w-sm">
           <div className="flex items-center gap-3">
@@ -100,7 +106,6 @@ export const Hero = () => {
           </div>
         </div>
       </div>
-
       <div className="absolute bottom-32 left-[15%] opacity-25">
         <div className="card-elevated p-3 max-w-xs">
           <div className="flex items-center gap-2">
@@ -110,7 +115,6 @@ export const Hero = () => {
           <div className="mt-1 text-lg font-bold text-accent">96.5%</div>
         </div>
       </div>
-
       <div className="absolute bottom-48 right-[12%] opacity-25">
         <div className="card-elevated p-3 max-w-xs">
           <div className="flex items-center gap-2">
