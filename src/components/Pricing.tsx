@@ -6,7 +6,6 @@ import { cn } from "@/lib/utils";
 import { useNavigate } from "react-router-dom";
 import { useLanguage } from "@/contexts/LanguageContext";
 
-// Pricing data based on the provided subscription information
 const plans = [
   {
     name: "Starter Plan",
@@ -19,16 +18,17 @@ const plans = [
     allowedUsers: 3,
     allowedTranscripts: 500,
     allowedReviews: 250,
-    description: "Perfect for small teams getting started with conversation analysis",
+    description:
+      "Perfect for small teams getting started with conversation analysis",
     features: [
       "Up to 3 users",
       "250 reviews per month",
       "500 transcripts",
       "Basic sentiment analysis",
       "Standard reporting",
-      "Email support"
+      "Email support",
     ],
-    popular: false
+    popular: false,
   },
   {
     name: "Pro Plan",
@@ -46,13 +46,11 @@ const plans = [
       "Up to 10 users",
       "1,000 reviews per month",
       "2,000 transcripts",
-      "Advanced AI analysis",
-      "Custom dashboards",
-      "Performance scoring",
-      "Priority support",
-      "API access"
+      "Basic sentiment analysis",
+      "Standard reporting",
+      "Email support",
     ],
-    popular: true
+    popular: true,
   },
   {
     name: "Business Plan",
@@ -65,20 +63,18 @@ const plans = [
     allowedUsers: 999999,
     allowedTranscripts: 20000,
     allowedReviews: 10000,
-    description: "Enterprise solution for large organizations with unlimited scale",
+    description:
+      "Enterprise solution for large organizations with unlimited scale",
     features: [
       "Up to 100 users",
       "10,000 reviews per month",
       "20,000 transcripts",
-      "White-label solution",
-      "Advanced security & compliance",
-      "Dedicated account manager",
-      "24/7 phone support",
-      "Custom integrations",
-      "On-premise deployment option"
+      "Basic sentiment analysis",
+      "Standard reporting",
+      "Email support",
     ],
-    popular: false
-  }
+    popular: false,
+  },
 ];
 
 export const Pricing = () => {
@@ -86,7 +82,7 @@ export const Pricing = () => {
   const navigate = useNavigate();
   const { t } = useLanguage();
 
-  const handleSubscribe = (plan: typeof plans[0]) => {
+  const handleSubscribe = (plan: (typeof plans)[0]) => {
     console.log("Plan button clicked:", plan.name);
     const planValue = plan.name.toLowerCase().replace(" plan", "");
     console.log("Navigating to:", `/register?plan=${planValue}`);
@@ -98,7 +94,7 @@ export const Pricing = () => {
       <section id="pricing" className="py-24 relative overflow-hidden">
         {/* Background Effects */}
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-accent/5 to-transparent" />
-        
+
         <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           {/* Header */}
           <div className="text-center mb-20">
@@ -106,29 +102,36 @@ export const Pricing = () => {
               <Zap className="mr-2 h-4 w-4 text-primary" />
               Simple Pricing
             </div>
-            
+
             <h2 className="text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl mb-6">
-              {t('pricing.title')}
+              {t("pricing.title")}
             </h2>
-            
+
             <p className="mx-auto max-w-2xl text-lg text-muted-foreground mb-8">
-              {t('pricing.subtitle')}
+              {t("pricing.subtitle")}
             </p>
 
             {/* Billing Toggle */}
             <div className="flex items-center justify-center gap-4">
-              <span className={cn("text-sm font-medium", !isYearly ? "text-foreground" : "text-muted-foreground")}>
+              <span
+                className={cn(
+                  "text-sm font-medium",
+                  !isYearly ? "text-foreground" : "text-muted-foreground"
+                )}
+              >
                 Monthly
               </span>
-              <Switch
-                checked={isYearly}
-                onCheckedChange={setIsYearly}
-              />
-              <span className={cn("text-sm font-medium", isYearly ? "text-foreground" : "text-muted-foreground")}>
-                Yearly 
-                <span className="ml-1 text-xs bg-success text-success-foreground px-2 py-1 rounded-full">
-                  20% off
-                </span>
+              <Switch checked={isYearly} onCheckedChange={setIsYearly} />
+              <span
+                className={cn(
+                  "text-sm font-medium",
+                  isYearly ? "text-foreground" : "text-muted-foreground"
+                )}
+              >
+                Yearly
+                {/* <span className="ml-1 text-xs bg-success text-success-foreground px-2 py-1 rounded-full">
+                  17% off
+                </span> */}
               </span>
             </div>
           </div>
@@ -137,35 +140,46 @@ export const Pricing = () => {
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
             {plans.map((plan, index) => {
               const price = isYearly ? plan.yearlyPrice : plan.monthlyPrice;
-              const savings = isYearly ? Math.round((plan.monthlyPrice * 12 - plan.yearlyPrice) / (plan.monthlyPrice * 12) * 100) : 0;
-              
+              const savings = isYearly
+                ? Math.round(
+                    ((plan.monthlyPrice * 12 - plan.yearlyPrice) /
+                      (plan.monthlyPrice * 12)) *
+                      100
+                  )
+                : 0;
+
               return (
                 <div
                   key={plan.name}
                   className={cn(
-                    "relative rounded-2xl p-8 transition-all duration-300",
-                    plan.popular
-                      ? "card-elevated border-primary/20 scale-105 lg:scale-110 pt-12"
-                      : "card-elevated"
+                    "relative rounded-2xl p-8 transition-transform duration-300 ease-in-out hover:scale-105",
+
+                    "card-elevated"
                   )}
                 >
                   {/* Popular Badge */}
-                  {plan.popular && (
+                  {/* {plan.popular && (
                     <div className="absolute -top-1 left-1/2 transform -translate-x-1/2">
                       <div className="inline-flex items-center rounded-full bg-gradient-to-r from-primary to-accent px-4 py-1.5 text-sm font-medium text-primary-foreground">
                         <Star className="mr-1 h-4 w-4" />
                         Most Popular
                       </div>
                     </div>
-                  )}
+                  )} */}
 
                   {/* Plan Header */}
                   <div className="text-center mb-8">
-                    <h3 className="text-2xl font-bold mb-2">{t(`pricing.${plan.name.toLowerCase().replace(' plan', '')}.title`)}</h3>
+                    <h3 className="text-2xl font-bold mb-2">
+                      {t(
+                        `pricing.${plan.name
+                          .toLowerCase()
+                          .replace(" plan", "")}.title`
+                      )}
+                    </h3>
                     <div className="mb-4">
                       <span className="text-4xl font-bold">€{price}</span>
                       <span className="text-muted-foreground ml-1">
-                        /{isYearly ? 'year' : 'month'}
+                        /{isYearly ? "year" : "month"}
                       </span>
                       {isYearly && savings > 0 && (
                         <div className="text-sm text-success mt-1">
@@ -173,7 +187,13 @@ export const Pricing = () => {
                         </div>
                       )}
                     </div>
-                    <p className="text-muted-foreground">{t(`pricing.${plan.name.toLowerCase().replace(' plan', '')}.desc`)}</p>
+                    <p className="text-muted-foreground">
+                      {t(
+                        `pricing.${plan.name
+                          .toLowerCase()
+                          .replace(" plan", "")}.desc`
+                      )}
+                    </p>
                   </div>
 
                   {/* Features */}
@@ -181,7 +201,9 @@ export const Pricing = () => {
                     {plan.features.map((feature) => (
                       <li key={feature} className="flex items-start">
                         <Check className="h-5 w-5 text-primary shrink-0 mt-0.5 mr-3" />
-                        <span className="text-sm text-muted-foreground">{feature}</span>
+                        <span className="text-sm text-muted-foreground">
+                          {feature}
+                        </span>
                       </li>
                     ))}
                   </ul>
