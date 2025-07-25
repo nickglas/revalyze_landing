@@ -45,14 +45,84 @@ export const Navigation = ({ className }: NavigationProps) => {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between">
           {/* Logo */}
+
           <div className="flex items-center space-x-2">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              xmlnsXlink="http://www.w3.org/1999/xlink"
+              className="w-[40px] h-[40px] sm:w-[60px] sm:h-[60px]"
+              viewBox="0 0 375 374.999991"
+              preserveAspectRatio="xMidYMid meet"
+              version="1.2"
+            >
+              <defs>
+                {/* Define gradient */}
+                <linearGradient
+                  id="primaryGradient"
+                  x1="0%"
+                  y1="0%"
+                  x2="100%"
+                  y2="0%"
+                >
+                  <stop offset="0%" stopColor="hsl(var(--primary))" />
+                  <stop offset="100%" stopColor="hsl(var(--primary) / 0)" />
+                </linearGradient>
+
+                <clipPath id="ac8a196e76">
+                  <path d="M97.773438 96.28125 L299.644531 96.28125 L299.644531 278.445312 L97.773438 278.445312 Z" />
+                </clipPath>
+                <clipPath id="00b0f4a8ed">
+                  <path d="M75 145.886719 L233.726562 145.886719 L233.726562 278.445312 L75 278.445312 Z" />
+                </clipPath>
+              </defs>
+
+              <g id="d469aabcea">
+                <g clipRule="nonzero" clipPath="url(#ac8a196e76)">
+                  <path
+                    style={{
+                      stroke: "none",
+                      fill: "url(#primaryGradient)",
+                      fillRule: "nonzero",
+                    }}
+                    d="M249.347656 220.425781 L249.332031 220.429688 C269.644531 209.117188 283.390625 187.425781 283.390625 162.523438 C283.390625 125.9375 253.734375 96.28125 217.148438 96.28125 L97.886719 96.28125 L113.75 114.578125 C121.910156 123.992188 133.761719 129.402344 146.222656 129.402344 L217.148438 129.402344 C235.441406 129.402344 250.269531 144.230469 250.269531 162.523438 C250.269531 180.816406 235.441406 195.644531 217.148438 195.644531 L184.027344 195.644531 L212.742188 228.765625 L242.957031 263.621094 C251.121094 273.039062 262.96875 278.445312 275.429688 278.445312 L299.644531 278.445312 L249.347656 220.425781"
+                  />
+                </g>
+
+                <g clipRule="nonzero" clipPath="url(#00b0f4a8ed)">
+                  <path
+                    style={{
+                      stroke: "none",
+                      fill: "url(#primaryGradient)",
+                      fillRule: "nonzero",
+                    }}
+                    d="M213.503906 179.082031 L197.644531 160.789062 C189.480469 151.371094 177.632812 145.964844 165.171875 145.964844 L75 145.964844 L177 263.621094 C185.164062 273.039062 197.011719 278.445312 209.472656 278.445312 L233.6875 278.445312 L147.546875 179.082031 L213.503906 179.082031"
+                  />
+                </g>
+
+                <path
+                  style={{
+                    fill: "none",
+                    strokeWidth: 4,
+                    stroke: "url(#primaryGradient)",
+                    strokeLinecap: "butt",
+                    strokeLinejoin: "miter",
+                    strokeMiterlimit: 4,
+                  }}
+                  d="M 0.00000516333 2.002294 L 160.000016 2.002294"
+                  transform="matrix(0.75,0,0,0.75,127.499996,108.256092)"
+                />
+              </g>
+            </svg>
+          </div>
+
+          {/* <div className="flex items-center space-x-2">
             <div className="w-8 h-8 bg-gradient-to-br from-primary to-accent rounded-lg flex items-center justify-center">
               <span className="text-white font-bold text-lg">R</span>
             </div>
             <span className="text-xl font-bold hero-gradient-text">
               Revalyze
             </span>
-          </div>
+          </div> */}
 
           {/* Desktop Navigation - Centered */}
           <div className="hidden md:block absolute left-1/2 transform -translate-x-1/2">
@@ -77,7 +147,7 @@ export const Navigation = ({ className }: NavigationProps) => {
           </div>
 
           {/* Desktop CTA - Language, Pricing & Login */}
-          <div className="hidden md:flex items-center space-x-4">
+          <div className="hidden md:flex items-center space-x-2">
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <Button variant="ghost" size="sm" className="gap-2">
