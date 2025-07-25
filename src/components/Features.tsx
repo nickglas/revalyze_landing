@@ -1,4 +1,11 @@
-import { Brain, BarChart3, Users, MessageSquare, TrendingUp, Shield } from "lucide-react";
+import {
+  Brain,
+  BarChart3,
+  Users,
+  MessageSquare,
+  TrendingUp,
+  Shield,
+} from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useNavigate } from "react-router-dom";
 import { useLanguage } from "@/contexts/LanguageContext";
@@ -7,39 +14,45 @@ const features = [
   {
     icon: Brain,
     title: "AI-Powered Sentiment Analysis",
-    description: "Advanced natural language processing analyzes emotional tone, satisfaction levels, and customer sentiment in real-time conversations.",
-    highlight: "99.2% accuracy rate"
+    description:
+      "Advanced natural language processing analyzes emotional tone, satisfaction levels, and customer sentiment in real-time conversations.",
+    highlight: "99.2% accuracy rate",
   },
   {
     icon: BarChart3,
     title: "Performance Analytics",
-    description: "Comprehensive performance metrics and scoring for each team member with actionable insights and improvement recommendations.",
-    highlight: "40% improvement average"
+    description:
+      "Comprehensive performance metrics and scoring for each team member with actionable insights and improvement recommendations.",
+    highlight: "40% improvement average",
   },
   {
     icon: MessageSquare,
     title: "Conversation Intelligence",
-    description: "Deep conversation analysis that identifies key topics, pain points, and opportunities across all customer interactions.",
-    highlight: "Real-time processing"
+    description:
+      "Deep conversation analysis that identifies key topics, pain points, and opportunities across all customer interactions.",
+    highlight: "Real-time processing",
   },
   {
     icon: TrendingUp,
     title: "Insights Dashboard",
-    description: "Beautiful, intuitive dashboards that transform raw conversation data into strategic business insights and trends.",
-    highlight: "Custom reporting"
+    description:
+      "Beautiful, intuitive dashboards that transform raw conversation data into strategic business insights and trends.",
+    highlight: "Custom reporting",
   },
   {
     icon: Users,
     title: "Team Performance Review",
-    description: "Automated performance reviews based on actual conversation data, helping managers make data-driven decisions.",
-    highlight: "Objective scoring"
+    description:
+      "Automated performance reviews based on actual conversation data, helping managers make data-driven decisions.",
+    highlight: "Objective scoring",
   },
   {
     icon: Shield,
     title: "Enterprise Security",
-    description: "Bank-grade security with end-to-end encryption, compliance with GDPR, SOX, and industry-specific regulations.",
-    highlight: "SOC 2 certified"
-  }
+    description:
+      "Bank-grade security with end-to-end encryption, compliance with GDPR, SOX, and industry-specific regulations.",
+    highlight: "SOC 2 certified",
+  },
 ];
 
 export const Features = () => {
@@ -58,7 +71,7 @@ export const Features = () => {
     <section id="features" className="py-24 relative overflow-hidden">
       {/* Background Effects */}
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-primary/5 to-transparent" />
-      
+
       <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-20">
@@ -66,13 +79,13 @@ export const Features = () => {
             <Brain className="mr-2 h-4 w-4 text-primary" />
             Powerful Features
           </div>
-          
+
           <h2 className="text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl mb-6">
-            {t('features.title')}
+            {t("features.title")}
           </h2>
-          
+
           <p className="mx-auto max-w-2xl text-lg text-muted-foreground">
-            {t('features.subtitle')}
+            {t("features.subtitle")}
           </p>
         </div>
 
@@ -81,11 +94,7 @@ export const Features = () => {
           {features.map((feature, index) => (
             <div
               key={feature.title}
-              className={cn(
-                "card-elevated p-8 group",
-                "animate-fade-in",
-                index % 2 === 1 && "mt-8" // Stagger effect
-              )}
+              className={cn("card-elevated p-8 group", "animate-fade-in")}
               style={{ animationDelay: `${index * 100}ms` }}
             >
               {/* Icon */}
@@ -97,7 +106,7 @@ export const Features = () => {
               <h3 className="text-xl font-semibold mb-4 text-foreground">
                 {feature.title}
               </h3>
-              
+
               <p className="text-muted-foreground mb-4 leading-relaxed">
                 {feature.description}
               </p>
@@ -118,16 +127,17 @@ export const Features = () => {
               Ready to see Revalyze in action?
             </h3>
             <p className="text-muted-foreground mb-6">
-              Join hundreds of teams already using our platform to transform their customer interactions.
+              Join hundreds of teams already using our platform to transform
+              their customer interactions.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <button 
+              <button
                 className="btn-glow px-8 py-3 rounded-lg font-semibold text-primary-foreground"
                 onClick={handleStartTrial}
               >
-                {t('features.cta')}
+                {t("features.cta")}
               </button>
-              <button 
+              <button
                 className="px-8 py-3 rounded-lg font-medium border border-primary/20 hover:border-primary/40 transition-colors"
                 onClick={handleScheduleDemo}
               >
