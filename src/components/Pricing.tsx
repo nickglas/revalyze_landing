@@ -216,7 +216,7 @@ export const Pricing = () => {
                             </div>
                           )}
                         </div>
-                        <p className="text-muted-foreground">
+                        <p className="text-muted-foreground min-h-20">
                           {t(
                             `pricing.${plan.name
                               .toLowerCase()

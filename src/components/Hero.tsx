@@ -28,7 +28,7 @@ export const Hero = () => {
       <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="relative">
           {/* Score Metrics - Positioned around the content */}
-          <div className="absolute opacity-30 hidden md:block md:-top-32 md:left-6">
+          <div className="absolute opacity-30 hidden md:block md:-top-[15%] md:left-[2%] lg:top-[5%]">
             <div className="card-elevated p-4 max-w-sm">
               <div className="flex items-center gap-3">
                 <div className="w-3 h-3 bg-success rounded-full animate-pulse-glow" />
@@ -41,7 +41,7 @@ export const Hero = () => {
             </div>
           </div>
 
-          <div className="absolute opacity-30 hidden md:block md:-top-44 md:right-6">
+          <div className="absolute opacity-30 hidden md:block md:-top-[10%] md:right-[2%] lg:top-[5%]">
             <div className="card-elevated p-4 max-w-sm">
               <div className="flex items-center gap-3">
                 <BarChart3 className="h-5 w-5 text-primary" />
@@ -54,7 +54,7 @@ export const Hero = () => {
             </div>
           </div>
 
-          <div className="absolute opacity-25 hidden md:block md:-bottom-20 md:left-6">
+          <div className="absolute opacity-25 hidden md:block md:-bottom-[5%] md:left-[2%] ">
             <div className="card-elevated p-3 max-w-xs">
               <div className="flex items-center gap-2">
                 <TrendingUp className="h-4 w-4 text-accent" />
@@ -64,7 +64,7 @@ export const Hero = () => {
             </div>
           </div>
 
-          <div className="absolute opacity-25 hidden md:block md:-bottom-28 md:right-6">
+          <div className="absolute opacity-25 hidden md:block md:-bottom-[5%] md:right-[2%]">
             <div className="card-elevated p-3 max-w-xs">
               <div className="flex items-center gap-2">
                 <Users className="h-4 w-4 text-primary" />

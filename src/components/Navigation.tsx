@@ -10,6 +10,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { motion, AnimatePresence } from "framer-motion";
 
 interface NavigationProps {
   className?: string;
@@ -207,77 +208,91 @@ export const Navigation = ({ className }: NavigationProps) => {
       </div>
 
       {/* Mobile Navigation */}
-      {isOpen && (
-        <div className="md:hidden absolute top-16 inset-x-0 bg-surface-elevated/95 backdrop-blur-lg border-t border-border">
-          <div className="px-2 pt-2 pb-3 space-y-1">
-            {navItems.map((item) => (
-              <a
-                key={item.href}
-                href={item.href}
-                className="block px-3 py-2 text-muted-foreground hover:text-foreground transition-colors duration-200 font-medium"
-                onClick={(e) => {
-                  e.preventDefault();
-                  setIsOpen(false);
-                  const targetId = item.href.substring(1);
-                  document
-                    .getElementById(targetId)
-                    ?.scrollIntoView({ behavior: "smooth" });
-                }}
-              >
-                {item.label}
-              </a>
-            ))}
-            <div className="pt-4 pb-2 border-t border-border space-y-2">
-              <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                  <Button variant="ghost" className="w-full justify-between">
-                    <div className="flex items-center gap-2">
-                      <IoEarth className="h-4 w-4" />
-                      <span>
-                        {language === "en"
-                          ? t("language.english")
-                          : t("language.dutch")}
-                      </span>
-                    </div>
-                    <ChevronDown className="h-3 w-3" />
-                  </Button>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent className="w-56">
-                  <DropdownMenuItem
-                    onClick={() => setLanguage("en")}
-                    className={language === "en" ? "bg-muted" : ""}
-                  >
-                    {t("language.english")}
-                  </DropdownMenuItem>
-                  <DropdownMenuItem
-                    onClick={() => setLanguage("nl")}
-                    className={language === "nl" ? "bg-muted" : ""}
-                  >
-                    {t("language.dutch")}
-                  </DropdownMenuItem>
-                </DropdownMenuContent>
-              </DropdownMenu>
-              <Button variant="ghost" className="w-full" asChild>
-                <a href="/login">{t("nav.login")}</a>
-              </Button>
-              <Button variant="glow" className="w-full" asChild>
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            key="mobile-menu"
+            className="md:hidden absolute top-16 inset-x-0 bg-background border-t border-border"
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.3, ease: "easeInOut" }}
+          >
+            <div className="px-2 pt-2 pb-3 space-y-1">
+              {navItems.map((item) => (
                 <a
-                  href="#pricing"
+                  key={item.href}
+                  href={item.href}
+                  className="block px-3 py-2 text-muted-foreground hover:text-foreground transition-colors duration-200 font-medium"
                   onClick={(e) => {
                     e.preventDefault();
                     setIsOpen(false);
+                    const targetId = item.href.substring(1);
                     document
-                      .getElementById("pricing")
+                      .getElementById(targetId)
                       ?.scrollIntoView({ behavior: "smooth" });
                   }}
                 >
-                  {t("nav.viewPricing")}
+                  {item.label}
                 </a>
-              </Button>
+              ))}
+              <div className="pt-4 pb-2 border-t border-border space-y-2">
+                <DropdownMenu>
+                  <DropdownMenuTrigger asChild>
+                    <Button
+                      variant="default"
+                      className="w-full justify-between bg-background text-foreground"
+                    >
+                      <div className="flex items-center gap-2">
+                        <IoEarth className="h-4 w-4" />
+                        <span>
+                          {language === "en"
+                            ? t("language.english")
+                            : t("language.dutch")}
+                        </span>
+                      </div>
+                      <ChevronDown className="h-3 w-3" />
+                    </Button>
+                  </DropdownMenuTrigger>
+
+                  <DropdownMenuContent className="w-full bg-background border-none shadow-none">
+                    <DropdownMenuItem
+                      onClick={() => setLanguage("en")}
+                      className={language === "en" ? "bg-muted" : ""}
+                    >
+                      {t("language.english")}
+                    </DropdownMenuItem>
+                    <DropdownMenuItem
+                      onClick={() => setLanguage("nl")}
+                      className={language === "nl" ? "bg-muted" : ""}
+                    >
+                      {t("language.dutch")}
+                    </DropdownMenuItem>
+                  </DropdownMenuContent>
+                </DropdownMenu>
+
+                <Button variant="hero" className="w-full" asChild>
+                  <a href="/login">{t("nav.login")}</a>
+                </Button>
+                <Button variant="glow" className="w-full" asChild>
+                  <a
+                    href="#pricing"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      setIsOpen(false);
+                      document
+                        .getElementById("pricing")
+                        ?.scrollIntoView({ behavior: "smooth" });
+                    }}
+                  >
+                    {t("nav.viewPricing")}
+                  </a>
+                </Button>
+              </div>
             </div>
-          </div>
-        </div>
-      )}
+          </motion.div>
+        )}
+      </AnimatePresence>
     </nav>
   );
 };
