@@ -6,6 +6,7 @@ metadata:
   namespace: revalyze
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: /$1
+    kubernetes.io/ingress.class: "public"
 spec:
   rules:
     - http:
