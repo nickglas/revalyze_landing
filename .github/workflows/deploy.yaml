@@ -16,6 +16,53 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
+      - name: Use Node.js 18.x
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Check required GitHub secrets presence
+        run: |
+          secrets=(
+            "${{ secrets.DOCKERHUB_TOKEN }}"
+            "${{ secrets.DOCKERHUB_USERNAME }}"
+            "${{ secrets.VPS_HOST }}"
+            "${{ secrets.VPS_SSH_KEY }}"
+            "${{ secrets.VPS_USER }}"
+          )
+          secret_names=(
+            "DOCKERHUB_TOKEN"
+            "DOCKERHUB_USERNAME"
+            "VPS_HOST"
+            "VPS_SSH_KEY"
+            "VPS_USER"
+          )
+
+          missing=0
+          for i in "${!secrets[@]}"; do
+            if [ -z "${secrets[$i]}" ]; then
+              echo "::error::Secret ${secret_names[$i]} is NOT set!"
+              missing=$((missing+1))
+            fi
+          done
+
+          if [ $missing -ne 0 ]; then
+            echo "Missing $missing required secret(s). Failing workflow."
+            exit 1
+          else
+            echo "All required secrets are set."
+          fi
+
+      - name: Build Vite React app
+        run: npm run build
+
+      - name: Get current git commit hash
+        id: git-info
+        run: echo "RUN_ID=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
+
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
 
@@ -31,8 +78,9 @@ jobs:
           context: .
           push: true
           tags: ${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}
-          cache-from: type=gha
-          cache-to: type=gha,mode=max
+          build-args: |
+            RUN_ID=${{ steps.git-info.outputs.RUN_ID }}
+          platforms: linux/amd64
 
       - name: Deploy to VPS via SSH
         uses: appleboy/ssh-action@v1.0.0
@@ -41,12 +89,20 @@ jobs:
           username: ${{ secrets.VPS_USER }}
           key: ${{ secrets.VPS_SSH_KEY }}
           script: |
-            # Create namespace if needed
+            # Clone/update CMS repo
+            if [ ! -d "/home/ubuntu/revalyze_cms/.git" ]; then
+              git clone https://github.com/nickglas/revalyze_cms.git /home/ubuntu/revalyze_cms && cd /home/ubuntu/revalyze_cms
+            else
+              cd /home/ubuntu/revalyze_cms && git pull origin production
+            fi
+
+            # Setup namespace if needed
             microk8s.kubectl create namespace revalyze --dry-run=client -o yaml | microk8s.kubectl apply -f -
 
-            # Apply manifests
-            microk8s.kubectl apply -f https://raw.githubusercontent.com/nickglas/revalyze_cms/main/k8s/cms-deployment.yaml
-            microk8s.kubectl apply -f https://raw.githubusercontent.com/nickglas/revalyze_cms/main/k8s/cms-service.yaml
+            # Apply manifests from local files
+            microk8s.kubectl apply -f k8s/cms-deployment.yaml
+            microk8s.kubectl apply -f k8s/cms-service.yaml
+            microk8s.kubectl apply -f k8s/ingress.yaml
 
             # Restart deployment
             microk8s.kubectl rollout restart deployment/revalyze-cms -n revalyze
