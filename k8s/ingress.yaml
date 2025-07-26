@@ -1,24 +1,16 @@
-# ingress.yaml
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: revalyze-ingress
   namespace: revalyze
   annotations:
-    nginx.ingress.kubernetes.io/rewrite-target: /$1
     kubernetes.io/ingress.class: "public"
+    nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
   rules:
     - http:
         paths:
-          - path: /api(/|$)(.*)
-            pathType: Prefix
-            backend:
-              service:
-                name: api
-                port:
-                  number: 4500
-          - path: /(.*)
+          - path: /
             pathType: Prefix
             backend:
               service:
