@@ -1,0 +1,19 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: revalyze-cms
+  namespace: revalyze
+spec:
+  gateways:
+    - revalyze-gateway
+  hosts:
+    - "*"
+  http:
+    - match:
+        - uri:
+            prefix: /
+      route:
+        - destination:
+            host: revalyze-cms.revalyze.svc.cluster.local
+            port:
+              number: 80

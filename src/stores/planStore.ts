@@ -3,6 +3,11 @@ import axios from "axios";
 import { Plan } from "../models/entity/plan";
 import { sortPlansByTier } from "@/lib/utils";
 
+const isProduction = import.meta.env.PROD;
+const API_BASE_URL = isProduction
+  ? "http://api.revalyze.svc.cluster.local:4500"
+  : "http://localhost:4500";
+
 interface PlanState {
   plans: Plan[];
   loading: boolean;
@@ -19,7 +24,7 @@ export const usePlanStore = create<PlanState>((set) => ({
     set({ loading: true });
     try {
       const res = await axios.get<Plan[]>(
-        "http://localhost:4500/api/v1/subscriptions"
+        `${API_BASE_URL}/api/v1/subscriptions`
       );
       const sortedPlans = sortPlansByTier(res.data, "month");
       set({ plans: sortedPlans, loading: false });

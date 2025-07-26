@@ -1,0 +1,24 @@
+# cms-deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: revalyze-cms
+  namespace: revalyze
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: revalyze-cms
+  template:
+    metadata:
+      labels:
+        app: revalyze-cms
+    spec:
+      containers:
+        - name: cms
+          image: nickglas/revalyze-cms:latest
+          ports:
+            - containerPort: 80
+          env:
+            - name: PRODUCTION
+              value: "true"

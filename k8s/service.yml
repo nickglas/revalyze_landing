@@ -1,0 +1,13 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: revalyze-cms
+  namespace: revalyze
+spec:
+  type: NodePort
+  selector:
+    app: revalyze-cms
+  ports:
+    - port: 80
+      targetPort: 80
+      nodePort: 30080
