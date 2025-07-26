@@ -1,12 +1,12 @@
-# cms-service.yaml
+# revalyze_landing.yaml
 apiVersion: v1
 kind: Service
 metadata:
-  name: revalyze-cms
+  name: revalyze_landing
   namespace: revalyze
 spec:
   selector:
-    app: revalyze-cms
+    app: revalyze_landing
   ports:
     - port: 80
       targetPort: 80

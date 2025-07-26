@@ -1,21 +1,21 @@
-# cms-deployment.yaml
+# landing_deployment.yaml
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: revalyze-cms
+  name: revalyze_landing
   namespace: revalyze
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: revalyze-cms
+      app: revalyze_landing
   template:
     metadata:
       labels:
-        app: revalyze-cms
+        app: revalyze_landing
     spec:
       containers:
-        - name: cms
-          image: nickglas/revalyze-cms:latest
+        - name: revalyze_landing
+          image: nickglas/revalyze_landing:latest
           ports:
             - containerPort: 80

@@ -1,12 +1,12 @@
 kind: Service
 apiVersion: v1
 metadata:
-  name: revalyze-cms
+  name: revalyze_landing
   namespace: revalyze
 spec:
   type: NodePort
   selector:
-    app: revalyze-cms
+    app: revalyze_landing
   ports:
     - port: 80
       targetPort: 80

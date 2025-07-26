@@ -1,4 +1,4 @@
-name: Build and Deploy CMS
+name: Build and Deploy revalyze landing
 
 on:
   push:
@@ -9,7 +9,7 @@ jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     env:
-      IMAGE_NAME: nickglas/revalyze-cms
+      IMAGE_NAME: nickglas/revalyze_landing
       IMAGE_TAG: latest
 
     steps:
@@ -89,20 +89,20 @@ jobs:
           username: ${{ secrets.VPS_USER }}
           key: ${{ secrets.VPS_SSH_KEY }}
           script: |
-            # Clone/update CMS repo
-            if [ ! -d "/home/ubuntu/revalyze_cms/.git" ]; then
-              git clone https://github.com/nickglas/revalyze_cms.git /home/ubuntu/revalyze_cms && cd /home/ubuntu/revalyze_cms
+            # Clone/update landing repo
+            if [ ! -d "/home/ubuntu/revalyze_landing/.git" ]; then
+              git clone https://github.com/nickglas/revalyze_landing.git /home/ubuntu/revalyze_landing && cd /home/ubuntu/revalyze_landing
             else
-              cd /home/ubuntu/revalyze_cms && git pull origin main
+              cd /home/ubuntu/revalyze_landing && git pull origin main
             fi
 
             # Setup namespace if needed
             microk8s.kubectl create namespace revalyze --dry-run=client -o yaml | microk8s.kubectl apply -f -
 
             # Apply manifests from local files
-            microk8s.kubectl apply -f k8s/cms-deployment.yaml
-            microk8s.kubectl apply -f k8s/cms-service.yaml
+            microk8s.kubectl apply -f k8s/revalyze_landing-deployment.yaml
+            microk8s.kubectl apply -f k8s/revalyze_landing-service.yaml
             microk8s.kubectl apply -f k8s/ingress.yaml
 
             # Restart deployment
-            microk8s.kubectl rollout restart deployment/revalyze-cms -n revalyze
+            microk8s.kubectl rollout restart deployment/revalyze_landing -n revalyze
