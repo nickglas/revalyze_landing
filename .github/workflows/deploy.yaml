@@ -105,4 +105,4 @@ jobs:
             microk8s.kubectl apply -f k8s/ingress.yaml
 
             # Restart deployment
-            microk8s.kubectl rollout restart deployment/revalyze_landing -n revalyze
+            microk8s.kubectl rollout restart deployment/revalyze-landing -n revalyze

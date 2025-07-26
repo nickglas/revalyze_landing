@@ -1,4 +1,4 @@
-# revalyze_landing.yaml
+# k8s/revalyze_landing-service.yaml
 apiVersion: v1
 kind: Service
 metadata:
