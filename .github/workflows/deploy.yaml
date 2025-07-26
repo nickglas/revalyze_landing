@@ -9,7 +9,7 @@ jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     env:
-      IMAGE_NAME: nickglas/revalyze_landing
+      IMAGE_NAME: nickglas/revalyze-landing
       IMAGE_TAG: latest
 
     steps:

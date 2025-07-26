@@ -21,6 +21,6 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: revalyze_landing
+                name: revalyze-landing
                 port:
                   number: 80

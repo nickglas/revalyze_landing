@@ -2,20 +2,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: revalyze_landing
+  name: revalyze-landing
   namespace: revalyze
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: revalyze_landing
+      app: revalyze-landing
   template:
     metadata:
       labels:
-        app: revalyze_landing
+        app: revalyze-landing
     spec:
       containers:
-        - name: revalyze_landing
-          image: nickglas/revalyze_landing:latest
+        - name: revalyze-landing
+          image: nickglas/revalyze-landing:latest
           ports:
             - containerPort: 80
