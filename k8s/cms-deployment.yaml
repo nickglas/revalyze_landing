@@ -19,6 +19,3 @@ spec:
           image: nickglas/revalyze-cms:latest
           ports:
             - containerPort: 80
-          env:
-            - name: PRODUCTION
-              value: "true"
