@@ -18,9 +18,7 @@ export const usePlanStore = create<PlanState>((set) => ({
   loadPlans: async () => {
     set({ loading: true });
     try {
-      const res = await axios.get<Plan[]>(
-        "http://api.revalyze.svc.cluster.local:4500/api/v1/subscriptions"
-      );
+      const res = await axios.get<Plan[]>("/api/v1/subscriptions");
       const sortedPlans = sortPlansByTier(res.data, "month");
       set({ plans: sortedPlans, loading: false });
     } catch (error) {
