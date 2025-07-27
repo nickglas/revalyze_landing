@@ -25,6 +25,7 @@ export const Navigation = ({ className }: NavigationProps) => {
     { href: "#features", label: t("nav.features") },
     { href: "#pricing", label: t("nav.pricing") },
     { href: "#about", label: t("nav.contact") },
+    { href: "#faq", label: "FAQ" },
   ];
 
   useEffect(() => {
