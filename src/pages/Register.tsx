@@ -20,6 +20,7 @@ import {
 import { Checkbox } from "@/components/ui/checkbox";
 import { Eye, EyeOff, ArrowLeft } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { PlanOption, usePlanStore } from "@/stores/planStore";
 
 export default function Register() {
   const [searchParams] = useSearchParams();
@@ -36,6 +37,8 @@ export default function Register() {
     acceptTerms: false,
   });
 
+  const { plans, selectPlan, selectedPlan } = usePlanStore();
+
   // Pre-select plan if coming from pricing
   useEffect(() => {
     const plan = searchParams.get("plan");
@@ -45,7 +48,17 @@ export default function Register() {
   }, [searchParams]);
 
   const handleInputChange = (field: string, value: string | boolean) => {
-    setFormData((prev) => ({ ...prev, [field]: value }));
+    const foundPlan = plans.find((plan) =>
+      plan.billingOptions.some((option) => option.stripePriceId === value)
+    );
+
+    const foundOption = foundPlan.billingOptions.find(
+      (option) => option.stripePriceId === value
+    );
+
+    selectPlan({ plan: foundPlan, selectedOption: foundOption });
+
+    console.warn(selectedPlan);
   };
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -65,33 +78,6 @@ export default function Register() {
     console.log("Registration form submitted:", formData);
     // TODO: Implement registration logic
   };
-
-  const plans = [
-    {
-      value: "starter",
-      label:
-        t("pricing.starter.title") +
-        " - " +
-        t("pricing.starter.price") +
-        t("pricing.starter.period"),
-    },
-    {
-      value: "pro",
-      label:
-        t("pricing.pro.title") +
-        " - " +
-        t("pricing.pro.price") +
-        t("pricing.pro.period"),
-    },
-    {
-      value: "business",
-      label:
-        t("pricing.business.title") +
-        " - " +
-        t("pricing.business.price") +
-        t("pricing.business.period"),
-    },
-  ];
 
   return (
     <div className="min-h-screen bg-background flex flex-col">
@@ -273,7 +259,7 @@ export default function Register() {
                 <div className="space-y-2">
                   <Label htmlFor="plan">{t("register.selectPlan")}</Label>
                   <Select
-                    value={formData.selectedPlan}
+                    value={selectedPlan.selectedOption.stripePriceId}
                     onValueChange={(value) =>
                       handleInputChange("selectedPlan", value)
                     }
@@ -282,15 +268,17 @@ export default function Register() {
                       <SelectValue placeholder={t("register.selectPlan")} />
                     </SelectTrigger>
                     <SelectContent className="bg-background border-neutral-800">
-                      {plans.map((plan) => (
-                        <SelectItem
-                          key={plan.value}
-                          value={plan.value}
-                          className=""
-                        >
-                          {plan.label}
-                        </SelectItem>
-                      ))}
+                      {plans.map((plan) =>
+                        plan.billingOptions.map((option) => (
+                          <SelectItem
+                            key={option.stripePriceId}
+                            value={option.stripePriceId}
+                            className=""
+                          >
+                            {plan.name} ({option.interval})
+                          </SelectItem>
+                        ))
+                      )}
                     </SelectContent>
                   </Select>
                 </div>

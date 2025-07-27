@@ -16,6 +16,8 @@ export const Pricing = () => {
   const navigate = useNavigate();
   const { t } = useLanguage();
 
+  const { selectPlan, selectedPlan } = usePlanStore();
+
   const { plans, loading, error, loadPlans } = usePlanStore(
     useShallow((state) => ({
       plans: state.plans,
@@ -33,10 +35,11 @@ export const Pricing = () => {
   const maxAnnualSavings = calculateMaxAnnualSavings(plans);
 
   const handleSubscribe = (plan: (typeof plans)[0]) => {
-    console.log("Plan button clicked:", plan.name);
-    const planValue = plan.name.toLowerCase().replace(" plan", "");
-    console.log("Navigating to:", `/register?plan=${planValue}`);
-    navigate(`/register?plan=${planValue}`);
+    const selectedBillingOption = plan.billingOptions.find(
+      (x) => x.interval === (isYearly ? "year" : "month")
+    );
+    selectPlan({ plan, selectedOption: selectedBillingOption });
+    navigate(`/register`);
   };
 
   return (
