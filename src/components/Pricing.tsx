@@ -9,7 +9,7 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import { usePlanStore } from "@/stores/planStore";
 import { useShallow } from "zustand/react/shallow";
 
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, Variants } from "framer-motion";
 
 export const Pricing = () => {
   const [isYearly, setIsYearly] = useState(false);
@@ -27,7 +27,6 @@ export const Pricing = () => {
     }))
   );
 
-  // Fetch plans on component mount
   useEffect(() => {
     loadPlans();
   }, [loadPlans]);
@@ -42,14 +41,40 @@ export const Pricing = () => {
     navigate(`/register`);
   };
 
+  // Animation Variants
+  const containerVariants: Variants = {
+    hidden: { opacity: 0, y: 40 },
+    show: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.6,
+        ease: "easeOut",
+        staggerChildren: 0.15,
+      },
+    },
+  };
+
+  const childVariants: Variants = {
+    hidden: { opacity: 0, y: 20 },
+    show: { opacity: 1, y: 0, transition: { duration: 0.4, ease: "easeOut" } },
+  };
+
   return (
-    <section id="pricing" className="py-24 relative overflow-hidden">
+    <motion.section
+      id="pricing"
+      className="py-24 relative overflow-hidden"
+      initial="hidden"
+      whileInView="show"
+      viewport={{ once: true, amount: 0.2 }}
+      variants={containerVariants}
+    >
       {/* Background Effects */}
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-accent/5 to-transparent" />
 
       <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <div className="text-center mb-20">
+        <motion.div className="text-center mb-20" variants={childVariants}>
           <div className="inline-flex items-center rounded-full border border-primary/20 bg-surface-elevated/50 px-4 py-1.5 text-sm font-medium text-muted-foreground backdrop-blur-sm mb-6">
             <Zap className="mr-2 h-4 w-4 text-primary" />
             Simple Pricing
@@ -64,7 +89,10 @@ export const Pricing = () => {
           </p>
 
           {/* Billing Toggle */}
-          <div className="flex flex-col items-center justify-center gap-3">
+          <motion.div
+            className="flex flex-col items-center justify-center gap-3"
+            variants={childVariants}
+          >
             <div className="flex items-center justify-center gap-4">
               <span
                 className={cn(
@@ -98,15 +126,21 @@ export const Pricing = () => {
                 ? `Save up to ${maxAnnualSavings}% with annual billing`
                 : `Switch to yearly for ${maxAnnualSavings}% savings`}
             </div>
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
 
         {/* Pricing Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+        <motion.div
+          className="grid grid-cols-1 lg:grid-cols-3 gap-8 max-w-6xl mx-auto"
+          variants={containerVariants}
+        >
           {loading
-            ? // Skeleton Loaders
-              Array.from({ length: 3 }).map((_, index) => (
-                <div key={index} className="card-elevated rounded-2xl p-8">
+            ? Array.from({ length: 3 }).map((_, index) => (
+                <motion.div
+                  key={index}
+                  className="card-elevated rounded-2xl p-8"
+                  variants={childVariants}
+                >
                   <div className="text-center mb-8">
                     <Skeleton className="h-8 w-32 mx-auto mb-4" />
                     <div className="mb-4">
@@ -125,7 +159,7 @@ export const Pricing = () => {
                     ))}
                   </div>
                   <Skeleton className="h-11 w-full rounded-lg" />
-                </div>
+                </motion.div>
               ))
             : plans.map((plan) => {
                 const monthlyOption = plan.billingOptions.find(
@@ -155,11 +189,13 @@ export const Pricing = () => {
                 );
 
                 return (
-                  <div
+                  <motion.div
                     key={plan._id}
                     className={cn(
-                      "relative rounded-2xl p-8 transition-all duration-300 cursor-pointer hover:scale-[1.02] card-elevated"
+                      "relative rounded-2xl p-8 transition-all duration-300 cursor-pointer card-elevated"
                     )}
+                    whileHover={{ scale: 1.02 }}
+                    variants={childVariants}
                     onClick={() => handleSubscribe(plan)}
                   >
                     {/* Plan Header */}
@@ -194,11 +230,6 @@ export const Pricing = () => {
                           </div>
                         )}
                       </div>
-                      {/* <p className="text-muted-foreground min-h-20">
-                        {plan.features.length > 0
-                          ? plan.features.join(", ")
-                          : "No extra features"}
-                      </p> */}
                     </div>
 
                     <ul className="space-y-4 mb-8">
@@ -224,7 +255,6 @@ export const Pricing = () => {
                       </li>
                     </ul>
 
-                    {/* Features */}
                     <ul className="space-y-4 mb-8">
                       {plan.features.map((feature) => (
                         <li key={feature} className="flex items-start">
@@ -236,7 +266,6 @@ export const Pricing = () => {
                       ))}
                     </ul>
 
-                    {/* CTA */}
                     <Button
                       variant="outline"
                       className="w-full"
@@ -245,13 +274,13 @@ export const Pricing = () => {
                     >
                       Subscribe to {plan.name}
                     </Button>
-                  </div>
+                  </motion.div>
                 );
               })}
-        </div>
+        </motion.div>
 
         {/* Additional Info */}
-        <div className="text-center mt-16">
+        <motion.div className="text-center mt-16" variants={childVariants}>
           <p className="text-muted-foreground mb-4">
             All plans include a 14-day free trial. No credit card required.
           </p>
@@ -269,8 +298,8 @@ export const Pricing = () => {
               Money-back guarantee
             </div>
           </div>
-        </div>
+        </motion.div>
       </div>
-    </section>
+    </motion.section>
   );
 };
