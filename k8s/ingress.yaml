@@ -12,7 +12,14 @@ spec:
   rules:
     - http:
         paths:
-          - path: /?(.*)
+          - path: /(.*)
+            pathType: Prefix
+            backend:
+              service:
+                name: revalyze-landing
+                port:
+                  number: 80
+          - path: /
             pathType: Prefix
             backend:
               service:
