@@ -30,15 +30,14 @@ export const About = () => {
   return (
     <motion.section
       id="about"
-      className="py-24 relative overflow-hidden"
+      className="py-16 md:py-24 relative"
       initial="hidden"
       whileInView="show"
-      viewport={{ once: true, amount: 0.3 }}
+      viewport={{ once: true, amount: 0.05 }}
       variants={containerVariants}
     >
       {/* Background Effects */}
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-accent/5 to-transparent animate-pulse-glow" />
-
+      <div className="hidden md:block absolute inset-0 bg-gradient-to-b from-transparent via-accent/5 to-transparent" />
       <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <motion.div className="text-center mb-16" variants={fadeInVariant}>
