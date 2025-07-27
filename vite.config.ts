@@ -12,11 +12,11 @@ export default defineConfig(({ mode }) => ({
             "/api": {
               target: "http://localhost:4500",
               changeOrigin: true,
-              rewrite: (path) => path.replace(/^\/api/, "/api"),
             },
           },
         }
       : undefined,
+
   base: "/",
   plugins: [react(), mode === "development" && componentTagger()].filter(
     Boolean
