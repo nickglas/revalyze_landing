@@ -5,25 +5,18 @@ metadata:
   namespace: revalyze
   annotations:
     kubernetes.io/ingress.class: "public"
-    nginx.ingress.kubernetes.io/rewrite-target: /$1
-    nginx.ingress.kubernetes.io/configuration-snippet: |
-      location ~ ^/api {
-        proxy_pass http://api.revalyze.svc.cluster.local:4500;
-        proxy_set_header Host $host;
-        proxy_set_header X-Real-IP $remote_addr;
-      }
 spec:
   rules:
     - http:
         paths:
-          - path: /api/?(.*) # API routes
+          - path: /api
             pathType: Prefix
             backend:
               service:
-                name: api # Points to API service
+                name: api
                 port:
                   number: 4500
-          - path: /?(.*) # Frontend routes
+          - path: /
             pathType: Prefix
             backend:
               service:
