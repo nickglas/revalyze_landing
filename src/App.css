@@ -18,6 +18,18 @@
   filter: drop-shadow(0 0 2em #61dafbaa);
 }
 
+.PhoneInput {
+  display: flex;
+  align-items: center;
+}
+
+.PhoneInputInput {
+  flex: 1;
+  border: none;
+  background: transparent;
+  outline: none;
+}
+
 @keyframes logo-spin {
   from {
     transform: rotate(0deg);

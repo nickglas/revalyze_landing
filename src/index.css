@@ -2,8 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Revalyze Design System - Modern SaaS Aesthetic */
-
 @layer base {
   :root {
     /* Core Brand Colors */
@@ -67,6 +65,16 @@
 
     --radius: 12px;
   }
+}
+
+.PhoneInputInput {
+  @apply bg-background text-foreground rounded-md px-3 py-2;
+}
+.PhoneInputCountrySelect {
+  @apply bg-background text-foreground border border-input;
+}
+.PhoneInputCountrySelect option:hover {
+  @apply bg-accent text-accent-foreground;
 }
 
 @layer base {

@@ -1,5 +1,9 @@
 import { useState, useEffect } from "react";
 import { useSearchParams, Link } from "react-router-dom";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import * as z from "zod";
+
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -20,63 +24,88 @@ import {
 import { Checkbox } from "@/components/ui/checkbox";
 import { Eye, EyeOff, ArrowLeft } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { PlanOption, usePlanStore } from "@/stores/planStore";
+import { usePlanStore } from "@/stores/planStore";
+import { useCompanyStore } from "@/stores/companyStore";
+import { PhoneInput } from "@/components/ui/PhoneInput";
+import { isValidPhoneNumber } from "react-phone-number-input";
+
+const registerSchema = z
+  .object({
+    fullName: z.string().min(2, "Full name is required"),
+    companyName: z.string().min(2, "Company name is required"),
+    companyPhone: z
+      .string()
+      .min(1, "Phone number is required")
+      .refine((val) => isValidPhoneNumber(val), {
+        message: "Invalid phone number",
+      }),
+    address: z.string().min(5, "Address is required"),
+    email: z.string().email("Invalid email address"),
+    password: z.string().min(6, "Password must be at least 6 characters"),
+    confirmPassword: z.string().min(6, "Confirm password is required"),
+    selectedPlan: z.string().nonempty("Please select a plan"),
+    acceptTerms: z.boolean().refine((val) => val === true, {
+      message: "You must accept the terms and conditions",
+    }),
+  })
+  .refine((data) => data.password === data.confirmPassword, {
+    message: "Passwords don't match",
+    path: ["confirmPassword"],
+  });
+
+type RegisterForm = z.infer<typeof registerSchema>;
 
 export default function Register() {
   const [searchParams] = useSearchParams();
   const { t } = useLanguage();
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-  const [formData, setFormData] = useState({
-    fullName: "",
-    companyName: "",
-    email: "",
-    password: "",
-    confirmPassword: "",
-    selectedPlan: "",
-    acceptTerms: false,
-  });
-
   const { plans, selectPlan, selectedPlan } = usePlanStore();
+  const { registerCompany, loading } = useCompanyStore();
+
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    watch,
+    formState: { errors },
+  } = useForm<RegisterForm>({
+    resolver: zodResolver(registerSchema),
+    defaultValues: {
+      fullName: "",
+      companyName: "",
+      companyPhone: "",
+      address: "",
+      email: "",
+      password: "",
+      confirmPassword: "",
+      selectedPlan: "",
+      acceptTerms: false,
+    },
+  });
 
   // Pre-select plan if coming from pricing
   useEffect(() => {
-    const plan = searchParams.get("plan");
-    if (plan) {
-      setFormData((prev) => ({ ...prev, selectedPlan: plan }));
+    const plan = selectedPlan;
+    if (plan) setValue("selectedPlan", plan.plan._id);
+  }, [searchParams, setValue]);
+
+  const onSubmit = async (data: RegisterForm) => {
+    const checkoutUrl = await registerCompany({
+      companyName: data.companyName,
+      companyMainEmail: data.email,
+      companyPhone: data.companyPhone,
+      address: data.address,
+      priceId: selectedPlan.selectedOption.stripePriceId,
+      adminName: data.fullName,
+      adminEmail: data.email,
+      password: data.password,
+      passwordConfirm: data.confirmPassword,
+    });
+
+    if (checkoutUrl) {
+      window.location.replace(checkoutUrl);
     }
-  }, [searchParams]);
-
-  const handleInputChange = (field: string, value: string | boolean) => {
-    const foundPlan = plans.find((plan) =>
-      plan.billingOptions.some((option) => option.stripePriceId === value)
-    );
-
-    const foundOption = foundPlan.billingOptions.find(
-      (option) => option.stripePriceId === value
-    );
-
-    selectPlan({ plan: foundPlan, selectedOption: foundOption });
-
-    console.warn(selectedPlan);
-  };
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-
-    // Basic validation
-    if (formData.password !== formData.confirmPassword) {
-      alert("Passwords don't match");
-      return;
-    }
-
-    if (!formData.acceptTerms) {
-      alert("Please accept the terms and conditions");
-      return;
-    }
-
-    console.log("Registration form submitted:", formData);
-    // TODO: Implement registration logic
   };
 
   return (
@@ -95,57 +124,13 @@ export default function Register() {
       {/* Main Content */}
       <div className="flex-1 flex items-center justify-center p-6">
         <div className="w-full max-w-md flex flex-col gap-2">
-          {/* Logo/Brand */}
-          <div className="justify-center flex">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="100"
-              viewBox="0 0 375 375"
-              preserveAspectRatio="xMidYMid meet"
-              className="text-[#3f3eb3]"
-            >
-              <defs>
-                <clipPath id="clip1">
-                  <path d="M 97.773438 96.28125 L 299.644531 96.28125 L 299.644531 278.445312 L 97.773438 278.445312 Z" />
-                </clipPath>
-                <clipPath id="clip2">
-                  <path d="M 75 145.886719 L 233.726562 145.886719 L 233.726562 278.445312 L 75 278.445312 Z" />
-                </clipPath>
-              </defs>
-              <g fill="currentColor">
-                <g clip-path="url(#clip1)">
-                  <path d="M 249.347656 220.425781 L 249.332031 220.429688 C 269.644531 209.117188 283.390625 187.425781 283.390625 162.523438 C 283.390625 125.9375 253.734375 96.28125 217.148438 96.28125 L 97.886719 96.28125 L 113.75 114.578125 C 121.910156 123.992188 133.761719 129.402344 146.222656 129.402344 L 217.148438 129.402344 C 235.441406 129.402344 250.269531 144.230469 250.269531 162.523438 C 250.269531 180.816406 235.441406 195.644531 217.148438 195.644531 L 184.027344 195.644531 L 212.742188 228.765625 L 242.957031 263.621094 C 251.121094 273.039062 262.96875 278.445312 275.429688 278.445312 L 299.644531 278.445312 L 249.347656 220.425781 Z" />
-                </g>
-                <g clip-path="url(#clip2)">
-                  <path d="M 213.503906 179.082031 L 197.644531 160.789062 C 189.480469 151.371094 177.632812 145.964844 165.171875 145.964844 L 75 145.964844 L 177 263.621094 C 185.164062 273.039062 197.011719 278.445312 209.472656 278.445312 L 233.6875 278.445312 L 147.546875 179.082031 L 213.503906 179.082031 Z" />
-                </g>
-                <path
-                  d="M 0.00000516333 2.002294 L 160.000016 2.002294"
-                  transform="matrix(0.75,0,0,0.75,127.499996,108.256092)"
-                  stroke="currentColor"
-                  stroke-width="4"
-                  fill="none"
-                />
-              </g>
-            </svg>
-          </div>
-
-          <Card
-            className="
-              relative overflow-hidden rounded-xl
-              border transition
-              [background:var(--gradient-surface)]
-              [box-shadow:var(--shadow-card)]
-              [border-color:hsl(var(--border))]
-              [transition:var(--transition-smooth)]
-            "
-          >
+          <Card className="relative overflow-hidden rounded-xl border transition">
             <CardHeader className="text-center">
               <CardTitle className="text-2xl">{t("register.title")}</CardTitle>
               <CardDescription>{t("register.subtitle")}</CardDescription>
             </CardHeader>
             <CardContent>
-              <form onSubmit={handleSubmit} className="space-y-4">
+              <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
                 {/* Full Name */}
                 <div className="space-y-2">
                   <Label htmlFor="fullName">{t("register.fullName")}</Label>
@@ -153,14 +138,14 @@ export default function Register() {
                     id="fullName"
                     type="text"
                     placeholder="Enter your full name"
-                    value={formData.fullName}
-                    onChange={(e) =>
-                      handleInputChange("fullName", e.target.value)
-                    }
-                    required
+                    {...register("fullName")}
                   />
+                  {errors.fullName && (
+                    <p className="text-red-500 text-sm">
+                      {errors.fullName.message}
+                    </p>
+                  )}
                 </div>
-
                 {/* Company Name */}
                 <div className="space-y-2">
                   <Label htmlFor="companyName">
@@ -170,12 +155,42 @@ export default function Register() {
                     id="companyName"
                     type="text"
                     placeholder="Enter your company name"
-                    value={formData.companyName}
-                    onChange={(e) =>
-                      handleInputChange("companyName", e.target.value)
-                    }
-                    required
+                    {...register("companyName")}
                   />
+                  {errors.companyName && (
+                    <p className="text-red-500 text-sm">
+                      {errors.companyName.message}
+                    </p>
+                  )}
+                </div>
+                <div className="space-y-2">
+                  <Label htmlFor="companyPhone">Company phone number</Label>
+                  <PhoneInput
+                    value={watch("companyPhone")}
+                    onChange={(val) => setValue("companyPhone", val || "")}
+                    placeholder="Enter phone number"
+                  />
+                  {errors.companyPhone && (
+                    <p className="text-red-500 text-sm">
+                      {errors.companyPhone.message}
+                    </p>
+                  )}
+                </div>
+
+                {/* Address */}
+                <div className="space-y-2">
+                  <Label htmlFor="address">Company address</Label>
+                  <Input
+                    id="address"
+                    type="text"
+                    placeholder="Enter your company address"
+                    {...register("address")}
+                  />
+                  {errors.address && (
+                    <p className="text-red-500 text-sm">
+                      {errors.address.message}
+                    </p>
+                  )}
                 </div>
 
                 {/* Email */}
@@ -185,12 +200,14 @@ export default function Register() {
                     id="email"
                     type="email"
                     placeholder="Enter your email"
-                    value={formData.email}
-                    onChange={(e) => handleInputChange("email", e.target.value)}
-                    required
+                    {...register("email")}
                   />
+                  {errors.email && (
+                    <p className="text-red-500 text-sm">
+                      {errors.email.message}
+                    </p>
+                  )}
                 </div>
-
                 {/* Password */}
                 <div className="space-y-2">
                   <Label htmlFor="password">{t("register.password")}</Label>
@@ -199,11 +216,7 @@ export default function Register() {
                       id="password"
                       type={showPassword ? "text" : "password"}
                       placeholder="Create a strong password"
-                      value={formData.password}
-                      onChange={(e) =>
-                        handleInputChange("password", e.target.value)
-                      }
-                      required
+                      {...register("password")}
                     />
                     <Button
                       type="button"
@@ -219,8 +232,12 @@ export default function Register() {
                       )}
                     </Button>
                   </div>
+                  {errors.password && (
+                    <p className="text-red-500 text-sm">
+                      {errors.password.message}
+                    </p>
+                  )}
                 </div>
-
                 {/* Confirm Password */}
                 <div className="space-y-2">
                   <Label htmlFor="confirmPassword">
@@ -231,11 +248,7 @@ export default function Register() {
                       id="confirmPassword"
                       type={showConfirmPassword ? "text" : "password"}
                       placeholder="Confirm your password"
-                      value={formData.confirmPassword}
-                      onChange={(e) =>
-                        handleInputChange("confirmPassword", e.target.value)
-                      }
-                      required
+                      {...register("confirmPassword")}
                     />
                     <Button
                       type="button"
@@ -253,16 +266,18 @@ export default function Register() {
                       )}
                     </Button>
                   </div>
+                  {errors.confirmPassword && (
+                    <p className="text-red-500 text-sm">
+                      {errors.confirmPassword.message}
+                    </p>
+                  )}
                 </div>
-
                 {/* Plan Selection */}
                 <div className="space-y-2">
                   <Label htmlFor="plan">{t("register.selectPlan")}</Label>
                   <Select
                     value={selectedPlan.selectedOption.stripePriceId}
-                    onValueChange={(value) =>
-                      handleInputChange("selectedPlan", value)
-                    }
+                    onValueChange={(value) => setValue("selectedPlan", value)}
                   >
                     <SelectTrigger>
                       <SelectValue placeholder={t("register.selectPlan")} />
@@ -273,7 +288,6 @@ export default function Register() {
                           <SelectItem
                             key={option.stripePriceId}
                             value={option.stripePriceId}
-                            className=""
                           >
                             {plan.name} ({option.interval})
                           </SelectItem>
@@ -281,33 +295,40 @@ export default function Register() {
                       )}
                     </SelectContent>
                   </Select>
+                  {errors.selectedPlan && (
+                    <p className="text-red-500 text-sm">
+                      {errors.selectedPlan.message}
+                    </p>
+                  )}
                 </div>
-
                 {/* Terms Checkbox */}
                 <div className="flex items-center space-x-2">
                   <Checkbox
                     id="terms"
-                    checked={formData.acceptTerms}
                     onCheckedChange={(checked) =>
-                      handleInputChange("acceptTerms", !!checked)
+                      setValue("acceptTerms", !!checked)
                     }
                   />
                   <label
                     htmlFor="terms"
-                    className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                    className="text-sm font-medium leading-none"
                   >
                     {t("register.terms")}
                   </label>
                 </div>
-
-                {/* Submit Button */}
+                {errors.acceptTerms && (
+                  <p className="text-red-500 text-sm">
+                    {errors.acceptTerms.message}
+                  </p>
+                )}
                 <Button
                   type="submit"
                   className="w-full bg-[#3f3eb3]"
                   variant="default"
                   size="lg"
+                  disabled={loading}
                 >
-                  {t("register.createAccount")}
+                  {loading ? "Registering..." : t("register.createAccount")}
                 </Button>
               </form>
 
