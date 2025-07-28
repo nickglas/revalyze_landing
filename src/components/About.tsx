@@ -1,153 +1,220 @@
-import { Users, Target, Eye } from "lucide-react";
+import { Users, Target, Eye, MapPin, ExternalLink } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { motion, Variants } from "framer-motion";
-
-const containerVariants: Variants = {
-  hidden: { opacity: 0, y: 30 },
-  show: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      staggerChildren: 0.15,
-      ease: [0, 0, 0.58, 1],
-      duration: 0.6,
-    },
-  },
-};
-
-const fadeInVariant: Variants = {
-  hidden: { opacity: 0, y: 20 },
-  show: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.5, ease: [0, 0, 0.58, 1] },
-  },
-};
+import { AnimatedSection } from "@/hooks/useScrollAnimation";
+import gijsPhoto from "@/assets/said.png";
+import nickPhoto from "@/assets/alex.webp";
 
 export const About = () => {
   const { t } = useLanguage();
 
   return (
-    <motion.section
-      id="about"
-      className="py-16 md:py-24 relative"
-      initial="hidden"
-      whileInView="show"
-      viewport={{ once: true, amount: 0.05 }}
-      variants={containerVariants}
-    >
-      {/* Background Effects */}
-      <div className="hidden md:block absolute inset-0 bg-gradient-to-b from-transparent via-accent/5 to-transparent" />
-      <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        {/* Header */}
-        <motion.div className="text-center mb-16" variants={fadeInVariant}>
-          <h2 className="text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl mb-6">
-            {t("about.title")}
-          </h2>
-        </motion.div>
+    <>
+      <section id="about" className="py-24 relative overflow-hidden">
+        {/* Background Effects */}
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-accent/5 to-transparent animate-pulse-glow" />
 
-        {/* Founders */}
-        <motion.div
-          className="flex flex-col sm:flex-row gap-8 justify-center items-center mb-20"
-          variants={containerVariants}
-        >
-          {/* Gijs */}
-          <motion.div className="text-center group" variants={fadeInVariant}>
-            <div className="relative mb-4">
-              <div className="w-32 h-32 mx-auto rounded-full bg-gradient-to-br from-primary/20 to-accent/20 flex items-center justify-center overflow-hidden hover-scale transition-all duration-300 group-hover:shadow-lg group-hover:shadow-primary/20">
-                <div className="w-24 h-24 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center transition-transform duration-300 group-hover:scale-110">
-                  <Users className="h-10 w-10 text-primary-foreground animate-float" />
+        <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          {/* Header */}
+          <AnimatedSection className="text-center mb-16">
+            <h2 className="text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl mb-6">
+              {t("about.title")}
+            </h2>
+          </AnimatedSection>
+
+          {/* Meet the Team Section */}
+          <AnimatedSection delay={0.2} className="mb-20">
+            <h3 className="text-2xl font-bold text-center mb-12">
+              Meet the Team
+            </h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-12 max-w-4xl mx-auto">
+              {/* Gijs Profile */}
+              <div className="card-elevated p-8 group hover:shadow-xl transition-all duration-500 hover:bg-surface-elevated/80 hover:-translate-y-2">
+                <div className="text-center">
+                  <div className="relative mb-6">
+                    <div className="w-32 h-32 mx-auto rounded-full overflow-hidden ring-4 ring-primary/20 group-hover:ring-primary/40 transition-all duration-300">
+                      <img
+                        src={gijsPhoto}
+                        alt="Gijs - Co-founder"
+                        className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+                        onLoad={() =>
+                          console.log(
+                            "Gijs photo loaded successfully:",
+                            gijsPhoto
+                          )
+                        }
+                        onError={(e) =>
+                          console.error(
+                            "Gijs photo failed to load:",
+                            e,
+                            gijsPhoto
+                          )
+                        }
+                      />
+                    </div>
+                  </div>
+
+                  <h3 className="text-2xl font-bold mb-2 group-hover:text-primary transition-colors">
+                    Gijs
+                  </h3>
+                  <p className="text-lg text-primary font-semibold mb-4">
+                    Co-founder & CEO
+                  </p>
+
+                  <div className="text-muted-foreground leading-relaxed mb-6 space-y-3">
+                    <p>
+                      Passionate about leveraging AI to transform customer
+                      service experiences. With a background in technology and
+                      business strategy, Gijs leads Revalyze's vision to make
+                      every customer interaction more meaningful.
+                    </p>
+                    <p className="text-sm italic">
+                      "Great customer service isn't just about solving
+                      problems—it's about understanding emotions and building
+                      connections."
+                    </p>
+                  </div>
+
+                  <a
+                    href="https://linkedin.com/in/gijs-example"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 text-primary hover:text-accent transition-colors group-hover:scale-105 transform duration-200"
+                  >
+                    <ExternalLink className="h-4 w-4" />
+                    Connect on LinkedIn
+                  </a>
+                </div>
+              </div>
+
+              {/* Nick Profile */}
+              <div className="card-elevated p-8 group hover:shadow-xl transition-all duration-500 hover:bg-surface-elevated/80 hover:-translate-y-2">
+                <div className="text-center">
+                  <div className="relative mb-6">
+                    <div className="w-32 h-32 mx-auto rounded-full overflow-hidden ring-4 ring-accent/20 group-hover:ring-accent/40 transition-all duration-300">
+                      <img
+                        src={nickPhoto}
+                        alt="Nick - Co-founder"
+                        className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+                        onLoad={() =>
+                          console.log(
+                            "Nick photo loaded successfully:",
+                            nickPhoto
+                          )
+                        }
+                        onError={(e) =>
+                          console.error(
+                            "Nick photo failed to load:",
+                            e,
+                            nickPhoto
+                          )
+                        }
+                      />
+                    </div>
+                  </div>
+
+                  <h3 className="text-2xl font-bold mb-2 group-hover:text-accent transition-colors">
+                    Nick
+                  </h3>
+                  <p className="text-lg text-accent font-semibold mb-4">
+                    Co-founder & CTO
+                  </p>
+
+                  <div className="text-muted-foreground leading-relaxed mb-6 space-y-3">
+                    <p>
+                      Expert in AI development and scalable systems
+                      architecture. Nick drives the technical innovation behind
+                      Revalyze's intelligent review platform, ensuring robust
+                      and reliable solutions.
+                    </p>
+                    <p className="text-sm italic">
+                      "The best technology is invisible—it just works, making
+                      people's lives better without them having to think about
+                      it."
+                    </p>
+                  </div>
+
+                  <a
+                    href="https://linkedin.com/in/nick-example"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 text-accent hover:text-primary transition-colors group-hover:scale-105 transform duration-200"
+                  >
+                    <ExternalLink className="h-4 w-4" />
+                    Connect on LinkedIn
+                  </a>
                 </div>
               </div>
             </div>
-            <h3 className="text-lg font-semibold mb-1 transition-colors duration-300 group-hover:text-primary">
-              Gijs
-            </h3>
-            <p className="text-muted-foreground text-sm">Co-founder</p>
-          </motion.div>
+          </AnimatedSection>
 
-          {/* Nick */}
-          <motion.div className="text-center group" variants={fadeInVariant}>
-            <div className="relative mb-4">
-              <div className="w-32 h-32 mx-auto rounded-full bg-gradient-to-br from-primary/20 to-accent/20 flex items-center justify-center overflow-hidden hover-scale transition-all duration-300 group-hover:shadow-lg group-hover:shadow-accent/20">
-                <div className="w-24 h-24 rounded-full bg-gradient-to-br from-accent to-primary flex items-center justify-center transition-transform duration-300 group-hover:scale-110">
-                  <Users className="h-10 w-10 text-primary-foreground animate-float" />
+          {/* Mission & Vision with Icons */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
+            {/* Mission */}
+            <AnimatedSection
+              delay={0.4}
+              className="card-elevated p-8 group hover:shadow-xl transition-all duration-500 hover:bg-surface-elevated/80 hover:-translate-y-1"
+            >
+              <div className="text-center mb-8">
+                <div className="w-20 h-20 mx-auto rounded-full bg-gradient-to-br from-primary/20 to-accent/20 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
+                  <div className="w-12 h-12 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center">
+                    <Target className="h-6 w-6 text-primary-foreground animate-float" />
+                  </div>
                 </div>
+                <h3 className="text-2xl font-bold transition-colors duration-300 group-hover:text-primary">
+                  2025 Mission & Vision
+                </h3>
               </div>
-            </div>
-            <h3 className="text-lg font-semibold mb-1 transition-colors duration-300 group-hover:text-accent">
-              Nick
-            </h3>
-            <p className="text-muted-foreground text-sm">Co-founder</p>
-          </motion.div>
-        </motion.div>
-
-        {/* Mission & Vision */}
-        <motion.div
-          className="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-6xl mx-auto"
-          variants={containerVariants}
-        >
-          {/* Mission */}
-          <motion.div
-            className="card-elevated p-8 group hover:shadow-xl transition-all duration-500 hover:bg-surface-elevated/80 hover:-translate-y-1"
-            variants={fadeInVariant}
-          >
-            <div className="flex items-center mb-4">
-              <div className="feature-icon mr-3 group-hover:animate-pulse-glow">
-                <Target className="h-6 w-6 text-primary-foreground transition-transform duration-300 group-hover:scale-110" />
-              </div>
-              <h3 className="text-2xl font-bold transition-colors duration-300 group-hover:text-primary">
-                2025 Mission & Vision
-              </h3>
-            </div>
-            <p className="text-muted-foreground leading-relaxed transition-colors duration-300 group-hover:text-foreground/80">
-              {t("about.content")}
-            </p>
-          </motion.div>
-
-          {/* Vision */}
-          <motion.div
-            className="card-elevated p-8 group hover:shadow-xl transition-all duration-500 hover:bg-surface-elevated/80 hover:-translate-y-1"
-            variants={fadeInVariant}
-          >
-            <div className="flex items-center mb-4">
-              <div className="feature-icon mr-3 group-hover:animate-pulse-glow">
-                <Eye className="h-6 w-6 text-primary-foreground transition-transform duration-300 group-hover:scale-110" />
-              </div>
-              <h3 className="text-2xl font-bold transition-colors duration-300 group-hover:text-accent">
-                Our Vision for the Future
-              </h3>
-            </div>
-            <div className="text-muted-foreground leading-relaxed space-y-4 transition-colors duration-300 group-hover:text-foreground/80">
-              <p>
-                To create a future where every customer interaction is
-                understood, valued, and improved through intelligent automation.
-                We envision a world where businesses no longer guess how their
-                teams perform or how customers feel. Instead, they gain instant,
-                objective insight through AI, helping every team deliver more
-                human, more effective service.
+              <p className="text-muted-foreground leading-relaxed text-center transition-colors duration-300 group-hover:text-foreground/80">
+                {t("about.content")}
               </p>
-              <p>
-                At Revalyze, we believe that truly understanding your customers
-                starts with listening, not just hearing. Our vision is to make
-                performance, empathy, and customer satisfaction measurable
-                through intelligent, AI-powered review systems. We aim to
-                empower companies with actionable insights that help their teams
-                grow, improve, and consistently deliver better service, one
-                conversation at a time.
-              </p>
-            </div>
-          </motion.div>
-        </motion.div>
+            </AnimatedSection>
 
-        {/* Contact Info */}
-        <motion.div className="text-center mt-16" variants={fadeInVariant}>
-          <div className="inline-flex items-center rounded-full border border-primary/20 bg-surface-elevated/50 px-6 py-3 text-sm font-medium text-muted-foreground backdrop-blur-sm hover:bg-surface-elevated/70 hover:border-primary/40 hover:text-foreground transition-all duration-300 hover:scale-105">
-            <Users className="mr-2 h-4 w-4 text-primary animate-float" />
-            Have questions? We'd love to hear from you.
+            {/* Vision */}
+            <AnimatedSection
+              delay={0.6}
+              className="card-elevated p-8 group hover:shadow-xl transition-all duration-500 hover:bg-surface-elevated/80 hover:-translate-y-1"
+            >
+              <div className="text-center mb-8">
+                <div className="w-20 h-20 mx-auto rounded-full bg-gradient-to-br from-accent/20 to-primary/20 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
+                  <div className="w-12 h-12 rounded-full bg-gradient-to-br from-accent to-primary flex items-center justify-center">
+                    <Eye className="h-6 w-6 text-primary-foreground animate-float [animation-delay:0.5s]" />
+                  </div>
+                </div>
+                <h3 className="text-2xl font-bold transition-colors duration-300 group-hover:text-accent">
+                  Our Vision for the Future
+                </h3>
+              </div>
+              <div className="text-muted-foreground leading-relaxed space-y-4 text-center transition-colors duration-300 group-hover:text-foreground/80">
+                <p>
+                  To create a future where every customer interaction is
+                  understood, valued, and improved through intelligent
+                  automation. We envision a world where businesses no longer
+                  guess how their teams perform or how customers feel. Instead,
+                  they gain instant, objective insight through AI, helping every
+                  team deliver more human, more effective service.
+                </p>
+                <p>
+                  At Revalyze, we believe that truly understanding your
+                  customers starts with listening, not just hearing. Our vision
+                  is to make performance, empathy, and customer satisfaction
+                  measurable through intelligent, AI-powered review systems. We
+                  aim to empower companies with actionable insights that help
+                  their teams grow, improve, and consistently deliver better
+                  service, one conversation at a time.
+                </p>
+              </div>
+            </AnimatedSection>
           </div>
-        </motion.div>
-      </div>
-    </motion.section>
+
+          {/* Contact Info */}
+          <AnimatedSection delay={0.8} className="text-center mt-16">
+            <div className="inline-flex items-center rounded-full border border-primary/20 bg-surface-elevated/50 px-6 py-3 text-sm font-medium text-muted-foreground backdrop-blur-sm hover:bg-surface-elevated/70 hover:border-primary/40 hover:text-foreground transition-all duration-300 hover:scale-105">
+              <Users className="mr-2 h-4 w-4 text-primary animate-float [animation-delay:1s]" />
+              Have questions? We'd love to hear from you.
+            </div>
+          </AnimatedSection>
+        </div>
+      </section>
+    </>
   );
 };

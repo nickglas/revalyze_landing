@@ -5,6 +5,7 @@ import { Pricing } from "@/components/Pricing";
 import { About } from "@/components/About";
 import { Footer } from "@/components/Footer";
 import { FAQ } from "@/components/FAQ";
+import { IndustriesSection } from "@/components/Industries";
 
 const Index = () => {
   return (
@@ -19,6 +20,9 @@ const Index = () => {
 
       {/* Features Section */}
       <Features />
+
+      {/* Industries Section */}
+      <IndustriesSection />
 
       {/* Pricing Section */}
       <Pricing />
