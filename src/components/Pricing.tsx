@@ -282,7 +282,7 @@ export const Pricing = () => {
         {/* Additional Info */}
         <motion.div className="text-center mt-16" variants={childVariants}>
           <p className="text-muted-foreground mb-4">
-            All plans include a 14-day free trial. No credit card required.
+            Select a plan and get a 7-day free trial with starter features
           </p>
           <div className="flex flex-wrap justify-center gap-8 text-sm text-muted-foreground">
             <div className="flex items-center">
@@ -291,11 +291,11 @@ export const Pricing = () => {
             </div>
             <div className="flex items-center">
               <Check className="h-4 w-4 text-primary mr-2" />
-              Setup assistance included
+              Easy and seamless setup
             </div>
             <div className="flex items-center">
               <Check className="h-4 w-4 text-primary mr-2" />
-              Money-back guarantee
+              Confident in our product
             </div>
           </div>
         </motion.div>
