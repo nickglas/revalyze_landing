@@ -57,20 +57,16 @@ export const About = () => {
                     Gijs
                   </h3>
                   <p className="text-lg text-primary font-semibold mb-4">
-                    Co-founder & CEO
+                    Co-founder
                   </p>
 
                   <div className="text-muted-foreground leading-relaxed mb-6 space-y-3">
                     <p>
-                      Passionate about leveraging AI to transform customer
-                      service experiences. With a background in technology and
-                      business strategy, Gijs leads Revalyze's vision to make
-                      every customer interaction more meaningful.
+                      With a background in marketing and a deep interest in tech and AI, I work at the intersection of strategy, brand and growth.
+                      I make sure Revalyze doesn't just look good, but is  clearly positioned and delivers real value to the people using it.
                     </p>
                     <p className="text-sm italic">
-                      "Great customer service isn't just about solving
-                      problems—it's about understanding emotions and building
-                      connections."
+                      "AI isn’t the answer, it’s the tool. The answer comes from how you use it."
                     </p>
                   </div>
 
@@ -116,20 +112,18 @@ export const About = () => {
                     Nick
                   </h3>
                   <p className="text-lg text-accent font-semibold mb-4">
-                    Co-founder & CTO
+                    Co-founder
                   </p>
 
                   <div className="text-muted-foreground leading-relaxed mb-6 space-y-3">
                     <p>
-                      Expert in AI development and scalable systems
-                      architecture. Nick drives the technical innovation behind
-                      Revalyze's intelligent review platform, ensuring robust
-                      and reliable solutions.
+                      I lead everything on the technical and product side, from system architecture to 
+                      AI implementation. 
+                      My background is in scalable software and applied machine learning, 
+                      and I focus on building tools that are fast, reliable, and genuinely useful.
                     </p>
                     <p className="text-sm italic">
-                      "The best technology is invisible—it just works, making
-                      people's lives better without them having to think about
-                      it."
+                      "Every line of code should earn its place."
                     </p>
                   </div>
 
@@ -161,7 +155,7 @@ export const About = () => {
                   </div>
                 </div>
                 <h3 className="text-2xl font-bold transition-colors duration-300 group-hover:text-primary">
-                  2025 Mission & Vision
+                  Our Mission
                 </h3>
               </div>
               <p className="text-muted-foreground leading-relaxed text-center transition-colors duration-300 group-hover:text-foreground/80">
@@ -181,7 +175,7 @@ export const About = () => {
                   </div>
                 </div>
                 <h3 className="text-2xl font-bold transition-colors duration-300 group-hover:text-accent">
-                  Our Vision for the Future
+                  Our Vision
                 </h3>
               </div>
               <div className="text-muted-foreground leading-relaxed space-y-4 text-center transition-colors duration-300 group-hover:text-foreground/80">

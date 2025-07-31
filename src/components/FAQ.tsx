@@ -14,43 +14,48 @@ const FAQ = () => {
     {
       question: "What is Revalyze and how does it work?",
       answer:
-        "Revalyze is an advanced analytics platform that helps businesses understand customer sentiment, track performance metrics, and make data-driven decisions. Our AI-powered system analyzes customer feedback across multiple channels to provide actionable insights.",
+        "Revalyze is a platform where you upload transcripts of conversations between you/your team/employees and your clients. Clients can be individual customers, like someone contacting your support team, or contacts from companies your business works with. You decide which criteria are important, such as: customer satisfaction, helpfulness, or problem solving. Our AI analyzes each conversation based on those criteria and inputs. The results are consistent and objective reviews. The dashboard shows clear performance insights per employee, per client and per company, so you can track and improve where it matters.",
     },
     {
       question: "How do I get started with my free trial?",
       answer:
-        "Getting started is easy! Simply click the 'Start Free Trial' button, create your account, and you'll have immediate access to all Pro features for 14 days. No credit card required during the trial period.",
+        "Click 'Start Free Trial', create your account, and you're in. You’ll get full access to all features of the Starter plan for 7 days, no credit card required. After the trial ends, your data will be deleted unless you choose a paid plan.",
     },
     {
-      question: "What kind of data sources can Revalyze analyze?",
+      question: "Can I create my own review criteria?",
       answer:
-        "Revalyze can analyze data from various sources including customer reviews, social media mentions, survey responses, support tickets, and direct feedback. We support integrations with popular platforms like Salesforce, HubSpot, and more.",
+        "Yes, that’s a core part of Revalyze. You can define custom criteria to review conversations, track sentiment, and measure quality across your team or external partners.",
     },
     {
       question: "Is my data secure with Revalyze?",
       answer:
-        "Absolutely. We use enterprise-grade security measures including end-to-end encryption, SOC 2 compliance, and regular security audits. Your data is stored securely and never shared with third parties without your explicit consent.",
+        "Yes. Revalyze takes data security and privacy seriously. Here's how we handle your data: Revalyze uses the OpenAI API to analyze conversations. Transcripts are temporarily sent to OpenAI for processing. This data is stored for a maximum of 30 days for abuse monitoring and security purposes, and is never used to train models. It is only accessible to authorized OpenAI personnel and is permanently deleted after that. By default, Revalyze has no access to your data. In rare cases, such as support requests, technical issues, or audits, authorized Revalyze staff may be granted temporary access, strictly limited to what is necessary. Our infrastructure is hosted in Germany, within the European Economic Area (EEA), by an ISO 27001-certified provider. All customer data is treated as confidential. Information is only shared with staff or processors who need access and are bound by strict confidentiality agreements. If Revalyze processes personal data on your behalf, our Data Processing Addendum (DPA) applies. This document is part of our terms and governs how we handle data under the GDPR.",
     },
     {
       question: "Can I customize the analytics dashboard?",
       answer:
-        "Yes! Our dashboard is fully customizable. You can create custom reports, set up automated alerts, choose your preferred visualizations, and organize metrics according to your business needs.",
+        "No, the dashboard layout is fixed, designed for clarity and speed. You can filter by company, contact, criteria, and timeframe, but full customization isn’t supported (yet).",
     },
     {
       question: "What happens after my trial ends?",
       answer:
-        "After your 14-day trial, you can choose to upgrade to one of our paid plans to continue using Revalyze. If you don't upgrade, your account will be paused, but your data will be safely stored for 30 days in case you decide to return.",
+        "If you don’t upgrade to a paid plan after 7 days, your account and all related data will be deleted automatically. This helps keep our system clean and secure.",
     },
     {
-      question: "Do you offer customer support?",
+      question: "How does account setup and user access work?",
       answer:
-        "Yes! We provide 24/7 customer support via chat and email for all users. Pro and Enterprise customers also get priority support and dedicated account management.",
+        "When you create a Revalyze account, you're also registering your company. That first account is automatically set as the Admin. From there, you can invite other team members as regular users, they’ll get their own dashboard but won’t have admin permissions like managing users or changing review settings.",
     },
     {
-      question: "Can I integrate Revalyze with my existing tools?",
+      question: "Does Revalyze support multiple roles?",
       answer:
-        "Revalyze offers robust API access and pre-built integrations with popular business tools including CRM systems, marketing platforms, and customer service software. Our team can also help with custom integrations.",
+        "Yes. There are two main roles: Admins (who manage everything) and Employees (who see their own performance and feedback).",
     },
+    {
+    question: "Who is Revalyze for?",
+    answer:
+      "Revalyze is built for teams that handle a lot of customer interaction like customer service teams, sales departments, agencies, or insurance companies. It’s especially useful for organizations that want to give structured feedback, spot trends, and improve conversations over time."
+  },
   ];
 
   return (

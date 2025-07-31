@@ -125,15 +125,15 @@ export const Hero = () => {
               <div className="flex flex-col sm:flex-row items-center justify-center gap-8 text-sm text-muted-foreground">
                 <div className="flex items-center gap-2">
                   <Users className="h-4 w-4 text-primary" />
-                  <span>500+ Teams Trust Revalyze</span>
+                  <span>Trusted by forward-thinking teams</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <BarChart3 className="h-4 w-4 text-primary" />
-                  <span>99.9% Uptime Guaranteed</span>
+                  <span>Always on, always secure</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <TrendingUp className="h-4 w-4 text-primary" />
-                  <span>40% Increase in Performance</span>
+                  <span>Built to help you and your team perform better</span>
                 </div>
               </div>
             </div>

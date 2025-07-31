@@ -30,37 +30,37 @@ const industries = [
     icon: Headphones,
     title: "Customer Service Teams",
     description:
-      "Analyze support conversations to improve response quality and customer satisfaction scores.",
+      "Track and analyze all past and ongoing customer interactions to accurately and unbiasedly measure customer sentiment and improve response quality and satisfaction.",
   },
   {
     icon: Phone,
     title: "Call Centers",
     description:
-      "Real-time coaching and performance insights for sales and support representatives.",
+      "Monitor conversations in real time and review historical interactions to provide objective coaching and actionable performance insights for sales and support reps.",
   },
   {
     icon: Target,
     title: "Marketing & Sales Agencies",
     description:
-      "Track client communication effectiveness and optimize conversion strategies.",
+      "Keep a clear overview of client communications over time, measuring effectiveness with unbiased AI analysis to optimize conversion strategies.",
   },
   {
     icon: Building,
     title: "B2B Companies",
     description:
-      "Enhance client relationship management with AI-powered conversation insights.",
+      "Manage and follow up on relationships with clients and partner companies by analyzing past conversations and identifying key topics with accurate AI-powered insights.",
   },
   {
     icon: Shield,
     title: "Insurance Companies",
     description:
-      "Improve intermediary performance and claim handling efficiency.",
+      "Track and evaluate intermediary performance and claim handling by objectively reviewing all interactions to drive quality and efficiency improvements.",
   },
   {
     icon: TrendingUp,
     title: "Growth-Focused Startups",
     description:
-      "Scale customer operations while maintaining high-quality interactions.",
+      "Maintain high-quality customer interactions at scale by continuously monitoring and analyzing communication history and performance metrics with precise and unbiased AI measurement.",
   },
 ];
 

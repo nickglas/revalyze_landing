@@ -23,8 +23,8 @@ const features = [
     icon: BarChart3,
     title: "Performance Analytics",
     description:
-      "Comprehensive performance metrics and scoring for each team member with actionable insights and improvement recommendations.",
-    highlight: "40% improvement average",
+      "Track performance per employee, per client, or per criteria. Get instant insights into what’s working and where things can improve.",
+    highlight: "Actionable and transparent",
   },
   {
     icon: MessageSquare,
@@ -37,8 +37,8 @@ const features = [
     icon: TrendingUp,
     title: "Insights Dashboard",
     description:
-      "Beautiful, intuitive dashboards that transform raw conversation data into strategic business insights and trends.",
-    highlight: "Custom reporting",
+      "All data in one clean, visual overview. See trends over time, compare teams, and explore performance metrics that actually matter.",
+    highlight: "No clutter, just clarity",
   },
   {
     icon: Users,
@@ -51,7 +51,7 @@ const features = [
     icon: Shield,
     title: "Enterprise Security",
     description:
-      "Bank-grade security with end-to-end encryption, compliance with GDPR, SOX, and industry-specific regulations.",
+      "Hosted in the EU with end-to-end encryption and strict access controls. We follow GDPR and process data responsibly using OpenAI API under strict limits.",
     highlight: "SOC 2 certified",
   },
 ];
@@ -170,8 +170,7 @@ export const Features = () => {
               Ready to see Revalyze in action?
             </h3>
             <p className="text-muted-foreground mb-6">
-              Join hundreds of teams already using our platform to transform
-              their customer interactions.
+              Join our team and start Revalyzing your interactions.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <button
