@@ -5,9 +5,16 @@ metadata:
   namespace: revalyze
   annotations:
     kubernetes.io/ingress.class: "public"
+    cert-manager.io/cluster-issuer: "letsencrypt-prod"
 spec:
+  tls:
+    - hosts:
+        - revalyze.io
+        - www.revalyze.io
+      secretName: revalyze-tls
   rules:
-    - http:
+    - host: revalyze.io
+      http:
         paths:
           - path: /api
             pathType: Prefix
@@ -16,6 +23,16 @@ spec:
                 name: api
                 port:
                   number: 4500
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: revalyze-landing
+                port:
+                  number: 80
+    - host: www.revalyze.io
+      http:
+        paths:
           - path: /
             pathType: Prefix
             backend:
