@@ -1,8 +1,7 @@
 import { Users, Target, Eye, MapPin, ExternalLink } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { AnimatedSection } from "@/hooks/useScrollAnimation";
-import gijsPhoto from "@/assets/said.png";
-import nickPhoto from "@/assets/alex.webp";
+import { IoMdPerson } from "react-icons/io";
 
 export const About = () => {
   const { t } = useLanguage();
@@ -31,25 +30,8 @@ export const About = () => {
               <div className="card-elevated p-8 group hover:shadow-xl transition-all duration-500 hover:bg-surface-elevated/80 hover:-translate-y-2">
                 <div className="text-center">
                   <div className="relative mb-6">
-                    <div className="w-32 h-32 mx-auto rounded-full overflow-hidden ring-4 ring-primary/20 group-hover:ring-primary/40 transition-all duration-300">
-                      <img
-                        src={gijsPhoto}
-                        alt="Gijs - Co-founder"
-                        className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
-                        onLoad={() =>
-                          console.log(
-                            "Gijs photo loaded successfully:",
-                            gijsPhoto
-                          )
-                        }
-                        onError={(e) =>
-                          console.error(
-                            "Gijs photo failed to load:",
-                            e,
-                            gijsPhoto
-                          )
-                        }
-                      />
+                    <div className="w-32 h-32 mx-auto flex items-center justify-center rounded-full overflow-hidden ring-4 ring-accent/20 group-hover:ring-accent/40 transition-all duration-300">
+                      <IoMdPerson className="w-2/3 h-2/3 text-gray-400 transition-transform duration-300 group-hover:scale-110" />
                     </div>
                   </div>
 
@@ -62,11 +44,15 @@ export const About = () => {
 
                   <div className="text-muted-foreground leading-relaxed mb-6 space-y-3">
                     <p>
-                      With a background in marketing and a deep interest in tech and AI, I work at the intersection of strategy, brand and growth.
-                      I make sure Revalyze doesn't just look good, but is  clearly positioned and delivers real value to the people using it.
+                      With a background in marketing and a deep interest in tech
+                      and AI, I work at the intersection of strategy, brand and
+                      growth. I make sure Revalyze doesn't just look good, but
+                      is clearly positioned and delivers real value to the
+                      people using it.
                     </p>
                     <p className="text-sm italic">
-                      "AI isn’t the answer, it’s the tool. The answer comes from how you use it."
+                      "AI isn’t the answer, it’s the tool. The answer comes from
+                      how you use it."
                     </p>
                   </div>
 
@@ -86,25 +72,8 @@ export const About = () => {
               <div className="card-elevated p-8 group hover:shadow-xl transition-all duration-500 hover:bg-surface-elevated/80 hover:-translate-y-2">
                 <div className="text-center">
                   <div className="relative mb-6">
-                    <div className="w-32 h-32 mx-auto rounded-full overflow-hidden ring-4 ring-accent/20 group-hover:ring-accent/40 transition-all duration-300">
-                      <img
-                        src={nickPhoto}
-                        alt="Nick - Co-founder"
-                        className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
-                        onLoad={() =>
-                          console.log(
-                            "Nick photo loaded successfully:",
-                            nickPhoto
-                          )
-                        }
-                        onError={(e) =>
-                          console.error(
-                            "Nick photo failed to load:",
-                            e,
-                            nickPhoto
-                          )
-                        }
-                      />
+                    <div className="w-32 h-32 mx-auto flex items-center justify-center rounded-full overflow-hidden ring-4 ring-accent/20 group-hover:ring-accent/40 transition-all duration-300">
+                      <IoMdPerson className="w-2/3 h-2/3 text-gray-400 transition-transform duration-300 group-hover:scale-110" />
                     </div>
                   </div>
 
@@ -117,10 +86,11 @@ export const About = () => {
 
                   <div className="text-muted-foreground leading-relaxed mb-6 space-y-3">
                     <p>
-                      I lead everything on the technical and product side, from system architecture to 
-                      AI implementation. 
-                      My background is in scalable software and applied machine learning, 
-                      and I focus on building tools that are fast, reliable, and genuinely useful.
+                      I lead everything on the technical and product side, from
+                      system architecture to AI implementation. My background is
+                      in scalable software and applied machine learning, and I
+                      focus on building tools that are fast, reliable, and
+                      genuinely useful.
                     </p>
                     <p className="text-sm italic">
                       "Every line of code should earn its place."
